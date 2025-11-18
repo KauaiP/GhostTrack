@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Metas - GhostTrack</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <!-- CSS Específico da Página -->
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../Home/home.html">
+                <i class="fas fa-ghost"></i>
+                GhostTrack
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Consulta/consulta.html"><i class="fas fa-search"></i> Consulta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Atualização/atualizacao.html"><i class="fas fa-edit"></i> Atualização</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-plus-circle"></i> Cadastrar Nova Meta</h1>
+            <p>Defina seu objetivo e comece a acompanhar seu progresso</p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Nova Meta</h2>
+                    <p>Preencha os campos abaixo para criar sua meta</p>
+                </div>
+
+                <div id="alertContainer"></div>
+
+                <form id="goalForm">
+                    <div class="mb-4">
+                        <label for="goalTitle" class="form-label">
+                            <i class="fas fa-bullseye"></i> Título da Meta *
+                        </label>
+                        <input type="text" class="form-control" id="goalTitle" placeholder="Ex: Correr 5km" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fas fa-layer-group"></i> Categoria *
+                        </label>
+                        <div class="category-select">
+                            <div class="category-option">
+                                <input type="radio" name="category" id="health" value="saude" required>
+                                <label for="health" class="category-label">
+                                    <div class="category-icon"><i class="fas fa-heartbeat"></i></div>
+                                    <div class="category-name">Saúde</div>
+                                </label>
+                            </div>
+                            <div class="category-option">
+                                <input type="radio" name="category" id="studies" value="estudos">
+                                <label for="studies" class="category-label">
+                                    <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
+                                    <div class="category-name">Estudos</div>
+                                </label>
+                            </div>
+                            <div class="category-option">
+                                <input type="radio" name="category" id="finance" value="financas">
+                                <label for="finance" class="category-label">
+                                    <div class="category-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <div class="category-name">Finanças</div>
+                                </label>
+                            </div>
+                            <div class="category-option">
+                                <input type="radio" name="category" id="personal" value="pessoal">
+                                <label for="personal" class="category-label">
+                                    <div class="category-icon"><i class="fas fa-user"></i></div>
+                                    <div class="category-name">Pessoal</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="goalDescription" class="form-label">
+                            <i class="fas fa-align-left"></i> Descrição
+                        </label>
+                        <textarea class="form-control" id="goalDescription" rows="4" placeholder="Descreva sua meta em detalhes..."></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="goalTarget" class="form-label">
+                                <i class="fas fa-flag-checkered"></i> Meta (valor) *
+                            </label>
+                            <input type="number" class="form-control" id="goalTarget" placeholder="Ex: 100" min="1" required>
+                            <small class="text-muted">Valor total que deseja alcançar</small>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="goalUnit" class="form-label">
+                                <i class="fas fa-ruler"></i> Unidade
+                            </label>
+                            <input type="text" class="form-control" id="goalUnit" placeholder="Ex: km, horas, reais">
+                            <small class="text-muted">Unidade de medida (opcional)</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="goalStart" class="form-label">
+                                <i class="fas fa-calendar-alt"></i> Data de Início *
+                            </label>
+                            <input type="date" class="form-control" id="goalStart" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="goalEnd" class="form-label">
+                                <i class="fas fa-calendar-check"></i> Data de Conclusão *
+                            </label>
+                            <input type="date" class="form-control" id="goalEnd" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-save"></i> Cadastrar Meta
+                    </button>
+                    <button type="reset" class="btn btn-reset">
+                        <i class="fas fa-redo"></i> Limpar Formulário
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
+                    <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="../Home/home.html">Home</a></li>
+                        <li><a href="../QS/qs.html">Quem Somos</a></li>
+                        <li><a href="./cadastro.html">Cadastro</a></li>
+                        <li><a href="../Relatorios/relatorios.html">Relatórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#">Saúde & Fitness</a></li>
+                        <li><a href="#">Estudos & Carreira</a></li>
+                        <li><a href="#">Finanças Pessoais</a></li>
+                        <li><a href="#">Desenvolvimento Pessoal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
+                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission handling
+        document.getElementById('goalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const goalData = {
+                title: document.getElementById('goalTitle').value,
+                category: document.querySelector('input[name="category"]:checked').value,
+                description: document.getElementById('goalDescription').value,
+                target: document.getElementById('goalTarget').value,
+                unit: document.getElementById('goalUnit').value,
+                startDate: document.getElementById('goalStart').value,
+                endDate: document.getElementById('goalEnd').value,
+                currentProgress: 0
+            };
+
+            // Aqui você faria a requisição para o backend
+            console.log('Nova meta:', goalData);
+
+            // Mostrar alerta de sucesso
+            showAlert('Meta cadastrada com sucesso!', 'success');
+            
+            // Limpar formulário
+            this.reset();
+        });
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // Set minimum date to today
+        document.getElementById('goalStart').min = new Date().toISOString().split('T')[0];
+        document.getElementById('goalEnd').min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>

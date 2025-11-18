@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualização de Progresso - GhostTrack</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <!-- CSS Específico da Página -->
+    <link rel="stylesheet" href="./atualizacao.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../Home/home.html">
+                <i class="fas fa-ghost"></i>
+                GhostTrack
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Consulta/consulta.html"><i class="fas fa-search"></i> Consulta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./atualizacao.html"><i class="fas fa-edit"></i> Atualização</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-chart-line"></i> Atualizar Progresso</h1>
+            <p>Registre seus avanços e acompanhe sua evolução</p>
+        </div>
+    </section>
+
+    <!-- Update Section -->
+    <section class="update-section">
+        <div class="container">
+            <div class="update-container">
+                <!-- Select Goal Card -->
+                <div class="select-goal-card" id="selectGoalCard">
+                    <h2><i class="fas fa-list"></i> Selecione a Meta</h2>
+                    <div class="goal-selector">
+                        <div class="goal-option" data-goal-id="1" data-current="65" data-target="100" data-unit="km">
+                            <div class="goal-info">
+                                <h4>Correr 100 km este mês</h4>
+                                <small><i class="fas fa-heartbeat"></i> Saúde</small>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-badge">65%</div>
+                                <small>65 / 100 km</small>
+                            </div>
+                        </div>
+
+                        <div class="goal-option" data-goal-id="2" data-current="32" data-target="80" data-unit="horas">
+                            <div class="goal-info">
+                                <h4>Estudar 80 horas de programação</h4>
+                                <small><i class="fas fa-graduation-cap"></i> Estudos</small>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-badge">40%</div>
+                                <small>32 / 80 horas</small>
+                            </div>
+                        </div>
+
+                        <div class="goal-option" data-goal-id="3" data-current="1250" data-target="5000" data-unit="reais">
+                            <div class="goal-info">
+                                <h4>Economizar R$ 5.000</h4>
+                                <small><i class="fas fa-dollar-sign"></i> Finanças</small>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-badge">25%</div>
+                                <small>R$ 1.250 / R$ 5.000</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Form Card -->
+                <div class="update-form-card" id="updateFormCard">
+                    <div class="form-header">
+                        <h3 id="selectedGoalTitle">Meta Selecionada</h3>
+                        <p id="selectedGoalCategory"></p>
+                    </div>
+
+                    <div class="current-progress">
+                        <h5><i class="fas fa-chart-bar"></i> Progresso Atual</h5>
+                        <div class="progress">
+                            <div class="progress-bar" id="currentProgressBar" style="width: 0%">0%</div>
+                        </div>
+                        <div class="progress-stats">
+                            <span id="currentValue">0</span>
+                            <span id="targetValue">0</span>
+                        </div>
+                    </div>
+
+                    <div id="alertContainer"></div>
+
+                    <form id="updateForm">
+                        <div class="mb-4">
+                            <label for="progressValue" class="form-label">
+                                <i class="fas fa-plus-circle"></i> Adicionar ao Progresso
+                            </label>
+                            <div class="input-with-unit">
+                                <input type="number" class="form-control" id="progressValue" placeholder="Digite o valor" min="0" step="0.01" required>
+                                <span class="unit-label" id="unitLabel">unidade</span>
+                            </div>
+                            <small class="text-muted">Quanto você progrediu desde a última atualização?</small>
+                            
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" data-value="1">+1</button>
+                                <button type="button" class="quick-add-btn" data-value="5">+5</button>
+                                <button type="button" class="quick-add-btn" data-value="10">+10</button>
+                                <button type="button" class="quick-add-btn" data-value="50">+50</button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="updateDate" class="form-label">
+                                <i class="fas fa-calendar-alt"></i> Data do Progresso
+                            </label>
+                            <input type="date" class="form-control" id="updateDate" required>
+                        </div>
+
+                        <div class="note-section">
+                            <label for="progressNote" class="form-label">
+                                <i class="fas fa-sticky-note"></i> Observações (opcional)
+                            </label>
+                            <textarea class="form-control" id="progressNote" rows="3" placeholder="Adicione observações sobre este progresso..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-save"></i> Salvar Progresso
+                        </button>
+                        <button type="button" class="btn btn-back" id="btnBack">
+                            <i class="fas fa-arrow-left"></i> Voltar para Seleção
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
+                    <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="../Home/home.html">Home</a></li>
+                        <li><a href="../QS/qs.html">Quem Somos</a></li>
+                        <li><a href="../Cadastro/cadastro.html">Cadastro</a></li>
+                        <li><a href="../Relatorios/relatorios.html">Relatórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#">Saúde & Fitness</a></li>
+                        <li><a href="#">Estudos & Carreira</a></li>
+                        <li><a href="#">Finanças Pessoais</a></li>
+                        <li><a href="#">Desenvolvimento Pessoal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
+                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let selectedGoal = null;
+
+        // Goal selection
+        document.querySelectorAll('.goal-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.goal-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+
+                selectedGoal = {
+                    id: this.dataset.goalId,
+                    title: this.querySelector('h4').textContent,
+                    category: this.querySelector('small').textContent,
+                    current: parseFloat(this.dataset.current),
+                    target: parseFloat(this.dataset.target),
+                    unit: this.dataset.unit
+                };
+
+                document.getElementById('selectGoalCard').style.display = 'none';
+                document.getElementById('updateFormCard').classList.add('active');
+
+                document.getElementById('selectedGoalTitle').textContent = selectedGoal.title;
+                document.getElementById('selectedGoalCategory').textContent = selectedGoal.category;
+                document.getElementById('unitLabel').textContent = selectedGoal.unit;
+
+                const percentage = (selectedGoal.current / selectedGoal.target * 100).toFixed(0);
+                document.getElementById('currentProgressBar').style.width = percentage + '%';
+                document.getElementById('currentProgressBar').textContent = percentage + '%';
+                document.getElementById('currentValue').textContent = `${selectedGoal.current} ${selectedGoal.unit}`;
+                document.getElementById('targetValue').textContent = `${selectedGoal.target} ${selectedGoal.unit}`;
+            });
+        });
+
+        // Back button
+        document.getElementById('btnBack').addEventListener('click', function() {
+            document.getElementById('selectGoalCard').style.display = 'block';
+            document.getElementById('updateFormCard').classList.remove('active');
+            document.getElementById('updateForm').reset();
+        });
+
+        // Quick add buttons
+        document.querySelectorAll('.quick-add-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const value = parseFloat(this.dataset.value);
+                const input = document.getElementById('progressValue');
+                const currentValue = parseFloat(input.value) || 0;
+                input.value = currentValue + value;
+            });
+        });
+
+        // Form submission
+        document.getElementById('updateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const progressValue = parseFloat(document.getElementById('progressValue').value);
+            const newProgress = selectedGoal.current + progressValue;
+            const percentage = (newProgress / selectedGoal.target * 100).toFixed(0);
+
+            showAlert(`Progresso atualizado com sucesso! Novo progresso: ${newProgress} / ${selectedGoal.target} ${selectedGoal.unit} (${percentage}%)`, 'success');
+
+            setTimeout(() => {
+                window.location.href = 'consulta.html';
+            }, 2000);
+        });
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show`;
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            alertContainer.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // Set date to today
+        document.getElementById('updateDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>

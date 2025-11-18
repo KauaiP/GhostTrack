@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Metas - GhostTrack</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <!-- CSS Específico da Página -->
+    <link rel="stylesheet" href="./consulta.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../Home/home.html">
+                <i class="fas fa-ghost"></i>
+                GhostTrack
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./consulta.html"><i class="fas fa-search"></i> Consulta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Atualização/atualizacao.html"><i class="fas fa-edit"></i> Atualização</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-search"></i> Consultar Metas</h1>
+            <p>Visualize e acompanhe todas as suas metas</p>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section class="goals-section">
+        <div class="container">
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <h5 class="mb-3"><i class="fas fa-filter"></i> Filtrar por Categoria</h5>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="todas">
+                        <i class="fas fa-list"></i> Todas
+                    </button>
+                    <button class="filter-btn" data-filter="saude">
+                        <i class="fas fa-heartbeat"></i> Saúde
+                    </button>
+                    <button class="filter-btn" data-filter="estudos">
+                        <i class="fas fa-graduation-cap"></i> Estudos
+                    </button>
+                    <button class="filter-btn" data-filter="financas">
+                        <i class="fas fa-dollar-sign"></i> Finanças
+                    </button>
+                    <button class="filter-btn" data-filter="pessoal">
+                        <i class="fas fa-user"></i> Pessoal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Goals List -->
+            <div id="goalsList">
+                <!-- Sample Goal 1 -->
+                <div class="goal-card" data-category="saude">
+                    <span class="goal-category-badge badge-saude">
+                        <i class="fas fa-heartbeat"></i> Saúde
+                    </span>
+                    <div class="goal-header">
+                        <div>
+                            <h3 class="goal-title">Correr 100 km este mês</h3>
+                            <div class="goal-dates">
+                                <span><i class="fas fa-calendar-alt"></i> Início: 01/11/2025</span>
+                                <span><i class="fas fa-calendar-check"></i> Fim: 30/11/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="goal-description">
+                        Meta de correr 100 km durante o mês de novembro para melhorar condicionamento físico.
+                    </p>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Progresso</span>
+                            <span>65 / 100 km</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 65%">65%</div>
+                        </div>
+                    </div>
+                    <div class="goal-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-flag-checkered"></i>
+                            <span>Meta: 100 km</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>15 dias restantes</span>
+                        </div>
+                    </div>
+                    <div class="goal-actions">
+                        <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> Detalhes
+                        </button>
+                        <button class="btn-action btn-update">
+                            <i class="fas fa-edit"></i> Atualizar
+                        </button>
+                        <button class="btn-action btn-delete">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sample Goal 2 -->
+                <div class="goal-card" data-category="estudos">
+                    <span class="goal-category-badge badge-estudos">
+                        <i class="fas fa-graduation-cap"></i> Estudos
+                    </span>
+                    <div class="goal-header">
+                        <div>
+                            <h3 class="goal-title">Estudar 80 horas de programação</h3>
+                            <div class="goal-dates">
+                                <span><i class="fas fa-calendar-alt"></i> Início: 01/11/2025</span>
+                                <span><i class="fas fa-calendar-check"></i> Fim: 31/12/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="goal-description">
+                        Dedicar 80 horas ao estudo de desenvolvimento web e tecnologias relacionadas.
+                    </p>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Progresso</span>
+                            <span>32 / 80 horas</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 40%">40%</div>
+                        </div>
+                    </div>
+                    <div class="goal-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-flag-checkered"></i>
+                            <span>Meta: 80 horas</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>46 dias restantes</span>
+                        </div>
+                    </div>
+                    <div class="goal-actions">
+                        <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> Detalhes
+                        </button>
+                        <button class="btn-action btn-update">
+                            <i class="fas fa-edit"></i> Atualizar
+                        </button>
+                        <button class="btn-action btn-delete">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sample Goal 3 -->
+                <div class="goal-card" data-category="financas">
+                    <span class="goal-category-badge badge-financas">
+                        <i class="fas fa-dollar-sign"></i> Finanças
+                    </span>
+                    <div class="goal-header">
+                        <div>
+                            <h3 class="goal-title">Economizar R$ 5.000</h3>
+                            <div class="goal-dates">
+                                <span><i class="fas fa-calendar-alt"></i> Início: 01/11/2025</span>
+                                <span><i class="fas fa-calendar-check"></i> Fim: 31/03/2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="goal-description">
+                        Meta de economia para a viagem de férias no meio do ano.
+                    </p>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Progresso</span>
+                            <span>R$ 1.250 / R$ 5.000</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 25%">25%</div>
+                        </div>
+                    </div>
+                    <div class="goal-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-flag-checkered"></i>
+                            <span>Meta: R$ 5.000</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-hourglass-half"></i>
+                            <span>136 dias restantes</span>
+                        </div>
+                    </div>
+                    <div class="goal-actions">
+                        <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> Detalhes
+                        </button>
+                        <button class="btn-action btn-update">
+                            <i class="fas fa-edit"></i> Atualizar
+                        </button>
+                        <button class="btn-action btn-delete">
+                            <i class="fas fa-trash"></i> Excluir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
+                    <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="../Home/home.html">Home</a></li>
+                        <li><a href="../QS/qs.html">Quem Somos</a></li>
+                        <li><a href="../Cadastro/cadastro.html">Cadastro</a></li>
+                        <li><a href="../Relatorios/relatorios.html">Relatórios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Categorias</h4>
+                    <ul>
+                        <li><a href="#">Saúde & Fitness</a></li>
+                        <li><a href="#">Estudos & Carreira</a></li>
+                        <li><a href="#">Finanças Pessoais</a></li>
+                        <li><a href="#">Desenvolvimento Pessoal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
+                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const goalCards = document.querySelectorAll('.goal-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                goalCards.forEach(card => {
+                    if (filter === 'todas' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Action buttons
+        document.querySelectorAll('.btn-view').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Funcionalidade de visualização de detalhes será implementada!');
+            });
+        });
+
+        document.querySelectorAll('.btn-update').forEach(btn => {
+            btn.addEventListener('click', function() {
+                window.location.href = 'atualizacao.html';
+            });
+        });
+
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Tem certeza que deseja excluir esta meta?')) {
+                    window.location.href = 'exclusao.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

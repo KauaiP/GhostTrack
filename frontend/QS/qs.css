@@ -1,0 +1,117 @@
+/* ===================================
+   QUEM SOMOS PAGE STYLES
+   =================================== */
+
+/* Content Section */
+.content-section {
+    padding: 80px 0;
+}
+
+.about-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.about-card h2 {
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.about-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.about-card ul {
+    margin-left: 20px;
+}
+
+.about-card ul li {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #6c757d;
+}
+
+/* Values Section */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.value-item {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.value-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+}
+
+.value-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--dark);
+}
+
+.value-item p {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+/* Team Section */
+.team-section {
+    background: white;
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.section-title p {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-card {
+        padding: 25px;
+    }
+}

@@ -1,0 +1,337 @@
+/* ===================================
+   GhostTrack - Global Styles
+   =================================== */
+
+:root {
+    --primary: #6C63FF;
+    --secondary: #4ECDC4;
+    --dark: #2C3E50;
+    --light: #F8F9FA;
+    --success: #2ECC71;
+    --warning: #F39C12;
+    --danger: #E74C3C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+}
+
+/* ===================================
+   NAVBAR STYLES
+   =================================== */
+
+.navbar {
+    background: white;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--primary) !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-brand i {
+    font-size: 1.8rem;
+}
+
+.nav-link {
+    color: var(--dark) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary) !important;
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    color: var(--primary) !important;
+}
+
+/* ===================================
+   PAGE HEADER STYLES
+   =================================== */
+
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 0 40px;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+.page-header.danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+/* ===================================
+   FOOTER STYLES
+   =================================== */
+
+.footer {
+    background: var(--dark);
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h4 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+}
+
+/* ===================================
+   FORM STYLES
+   =================================== */
+
+.form-label {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.15);
+}
+
+/* ===================================
+   BUTTON STYLES
+   =================================== */
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+}
+
+.btn-reset, .btn-back {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    color: var(--dark);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-reset:hover, .btn-back:hover {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+/* ===================================
+   ALERT STYLES
+   =================================== */
+
+.alert {
+    border-radius: 10px;
+    border: none;
+    padding: 15px 20px;
+}
+
+/* ===================================
+   PROGRESS BAR STYLES
+   =================================== */
+
+.progress {
+    height: 25px;
+    border-radius: 12px;
+    background: #e9ecef;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: width 0.6s ease;
+}
+
+/* Category specific progress bars */
+.progress-bar.saude {
+    background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+}
+
+.progress-bar.estudos {
+    background: linear-gradient(90deg, #4ECDC4, #44A08D);
+}
+
+.progress-bar.financas {
+    background: linear-gradient(90deg, #F39C12, #F1C40F);
+}
+
+.progress-bar.pessoal {
+    background: linear-gradient(90deg, #9B59B6, #8E44AD);
+}
+
+/* ===================================
+   CATEGORY BADGES
+   =================================== */
+
+.badge-saude, .category-saude {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+    color: white;
+}
+
+.badge-estudos, .category-estudos {
+    background: linear-gradient(135deg, #4ECDC4, #44A08D);
+    color: white;
+}
+
+.badge-financas, .category-financas {
+    background: linear-gradient(135deg, #F39C12, #F1C40F);
+    color: white;
+}
+
+.badge-pessoal, .category-pessoal {
+    background: linear-gradient(135deg, #9B59B6, #8E44AD);
+    color: white;
+}
+
+/* ===================================
+   ANIMATIONS
+   =================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   RESPONSIVE STYLES
+   =================================== */
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .page-header p {
+        font-size: 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+}
