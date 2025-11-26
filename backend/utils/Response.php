@@ -18,3 +18,4 @@ class Response {
         exit;
     }
 }
+?>

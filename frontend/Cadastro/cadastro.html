@@ -210,30 +210,61 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Form submission handling
-        document.getElementById('goalForm').addEventListener('submit', function(e) {
+    <script type="module">
+        import { criarMeta } from '../js/api.js';
+
+        // Configura a data mínima para hoje
+        const hoje = new Date().toISOString().split('T')[0];
+        document.getElementById('goalStart').min = hoje;
+        document.getElementById('goalEnd').min = hoje;
+
+        document.getElementById('goalForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            const goalData = {
-                title: document.getElementById('goalTitle').value,
-                category: document.querySelector('input[name="category"]:checked').value,
-                description: document.getElementById('goalDescription').value,
-                target: document.getElementById('goalTarget').value,
-                unit: document.getElementById('goalUnit').value,
-                startDate: document.getElementById('goalStart').value,
-                endDate: document.getElementById('goalEnd').value,
-                currentProgress: 0
-            };
 
-            // Aqui você faria a requisição para o backend
-            console.log('Nova meta:', goalData);
-
-            // Mostrar alerta de sucesso
-            showAlert('Meta cadastrada com sucesso!', 'success');
+            // --- CORREÇÃO AQUI ---
+            // Para pegar o valor de radio buttons, usamos o seletor querySelector
+            // procurando pelo input com name="category" que esteja marcado (:checked)
+            const categoriaElement = document.querySelector('input[name="category"]:checked');
             
-            // Limpar formulário
-            this.reset();
+            // Validação extra caso nada tenha sido selecionado
+            const categoria = categoriaElement ? categoriaElement.value : "pessoal"; 
+            // ---------------------
+
+            const titulo = document.getElementById('goalTitle').value;
+            const descricao = document.getElementById('goalDescription').value;
+            const valor = document.getElementById('goalTarget').value;
+            const unidade = document.getElementById('goalUnit').value;
+            const data_inicio = document.getElementById('goalStart').value;
+            const data_conclusao = document.getElementById('goalEnd').value;
+            
+            const usuario_id = 1; 
+            const progresso = 0;
+
+            try {
+                const resultado = await criarMeta(
+                    usuario_id, 
+                    titulo, 
+                    descricao, 
+                    categoria, 
+                    valor, 
+                    unidade, 
+                    data_inicio, 
+                    data_conclusao, 
+                    progresso
+                );
+
+                if (resultado && resultado.success) {
+                    showAlert('✅ Meta salva com sucesso no Banco de Dados!', 'success');
+                    this.reset(); 
+                } else {
+                    showAlert('❌ Erro: ' + (resultado.message || 'Erro desconhecido'), 'danger');
+                    console.error('Erro do Backend:', resultado);
+                }
+
+            } catch (error) {
+                console.error('Erro de conexão:', error);
+                showAlert('⚠️ Erro ao conectar com o servidor.', 'danger');
+            }
         });
 
         function showAlert(message, type) {
@@ -250,10 +281,6 @@
                 alert.remove();
             }, 5000);
         }
-
-        // Set minimum date to today
-        document.getElementById('goalStart').min = new Date().toISOString().split('T')[0];
-        document.getElementById('goalEnd').min = new Date().toISOString().split('T')[0];
     </script>
 </body>
 </html>

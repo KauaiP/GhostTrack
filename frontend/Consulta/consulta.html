@@ -7,274 +7,126 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <!-- CSS Específico da Página -->
     <link rel="stylesheet" href="./consulta.css">
+    
+    <style>
+        /* Força texto branco na aba selecionada (Em Andamento / Concluídas) */
+        .nav-pills .nav-link.active {
+            color: #ffffff !important;
+            background-color: #0d6efd; /* Azul padrão Bootstrap (ou sua cor primária) */
+            font-weight: 600;
+        }
+        /* Cor do texto quando não está selecionado */
+        .nav-pills .nav-link {
+            color: #495057; 
+            background-color: #f8f9fa; /* Fundo cinza claro para destacar o botão */
+            margin: 0 5px;
+        }
+
+        /* Força texto branco nos botões de filtro (Todas, Saúde, etc) */
+        .filter-btn.active {
+            color: #ffffff !important;
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        /* Hover nos botões de filtro */
+        .filter-btn:hover {
+            background-color: #e2e6ea;
+            color: #0d6efd;
+        }
+        .filter-btn.active:hover {
+            background-color: #0b5ed7;
+            color: #ffffff !important;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../Home/home.html">
-                <i class="fas fa-ghost"></i>
-                GhostTrack
+                <i class="fas fa-ghost"></i> GhostTrack
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./consulta.html"><i class="fas fa-search"></i> Consulta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Atualização/atualizacao.html"><i class="fas fa-edit"></i> Atualização</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./consulta.html"><i class="fas fa-search"></i> Consulta</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Atualização/atualizacao.html"><i class="fas fa-edit"></i> Atualização</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1><i class="fas fa-search"></i> Consultar Metas</h1>
-            <p>Visualize e acompanhe todas as suas metas</p>
+            <p>Visualize suas metas ativas e seu histórico de conquistas</p>
         </div>
     </section>
 
-    <!-- Goals Section -->
     <section class="goals-section">
         <div class="container">
-            <!-- Filter Section -->
-            <div class="filter-section">
-                <h5 class="mb-3"><i class="fas fa-filter"></i> Filtrar por Categoria</h5>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="todas">
-                        <i class="fas fa-list"></i> Todas
+            
+            <ul class="nav nav-pills mb-4 justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-active-tab" data-bs-toggle="pill" data-bs-target="#pills-active" type="button" role="tab">
+                        <i class="fas fa-running"></i> Em Andamento
                     </button>
-                    <button class="filter-btn" data-filter="saude">
-                        <i class="fas fa-heartbeat"></i> Saúde
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-completed-tab" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab">
+                        <i class="fas fa-check-circle"></i> Concluídas
                     </button>
-                    <button class="filter-btn" data-filter="estudos">
-                        <i class="fas fa-graduation-cap"></i> Estudos
-                    </button>
-                    <button class="filter-btn" data-filter="financas">
-                        <i class="fas fa-dollar-sign"></i> Finanças
-                    </button>
-                    <button class="filter-btn" data-filter="pessoal">
-                        <i class="fas fa-user"></i> Pessoal
-                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+                
+                <div class="tab-pane fade show active" id="pills-active" role="tabpanel">
+                    <div class="filter-section mb-4">
+                        <h5 class="mb-3"><i class="fas fa-filter"></i> Filtrar por Categoria</h5>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="todas">Todas</button>
+                            <button class="filter-btn" data-filter="saude">Saúde</button>
+                            <button class="filter-btn" data-filter="estudos">Estudos</button>
+                            <button class="filter-btn" data-filter="financas">Finanças</button>
+                            <button class="filter-btn" data-filter="pessoal">Pessoal</button>
+                        </div>
+                    </div>
+
+                    <div id="goalsListActive">
+                        <div class="text-center mt-5">
+                            <div class="spinner-border text-primary"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-completed" role="tabpanel">
+                    <div id="goalsListCompleted">
+                        <div class="text-center mt-5">
+                            <div class="spinner-border text-success"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Goals List -->
-            <div id="goalsList">
-                <!-- Sample Goal 1 -->
-                <div class="goal-card" data-category="saude">
-                    <span class="goal-category-badge badge-saude">
-                        <i class="fas fa-heartbeat"></i> Saúde
-                    </span>
-                    <div class="goal-header">
-                        <div>
-                            <h3 class="goal-title">Correr 100 km este mês</h3>
-                            <div class="goal-dates">
-                                <span><i class="fas fa-calendar-alt"></i> Início: 01/11/2025</span>
-                                <span><i class="fas fa-calendar-check"></i> Fim: 30/11/2025</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="goal-description">
-                        Meta de correr 100 km durante o mês de novembro para melhorar condicionamento físico.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Progresso</span>
-                            <span>65 / 100 km</span>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 65%">65%</div>
-                        </div>
-                    </div>
-                    <div class="goal-stats">
-                        <div class="stat-item">
-                            <i class="fas fa-flag-checkered"></i>
-                            <span>Meta: 100 km</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-hourglass-half"></i>
-                            <span>15 dias restantes</span>
-                        </div>
-                    </div>
-                    <div class="goal-actions">
-                        <button class="btn-action btn-view">
-                            <i class="fas fa-eye"></i> Detalhes
-                        </button>
-                        <button class="btn-action btn-update">
-                            <i class="fas fa-edit"></i> Atualizar
-                        </button>
-                        <button class="btn-action btn-delete">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Sample Goal 2 -->
-                <div class="goal-card" data-category="estudos">
-                    <span class="goal-category-badge badge-estudos">
-                        <i class="fas fa-graduation-cap"></i> Estudos
-                    </span>
-                    <div class="goal-header">
-                        <div>
-                            <h3 class="goal-title">Estudar 80 horas de programação</h3>
-                            <div class="goal-dates">
-                                <span><i class="fas fa-calendar-alt"></i> Início: 01/11/2025</span>
-                                <span><i class="fas fa-calendar-check"></i> Fim: 31/12/2025</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="goal-description">
-                        Dedicar 80 horas ao estudo de desenvolvimento web e tecnologias relacionadas.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Progresso</span>
-                            <span>32 / 80 horas</span>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 40%">40%</div>
-                        </div>
-                    </div>
-                    <div class="goal-stats">
-                        <div class="stat-item">
-                            <i class="fas fa-flag-checkered"></i>
-                            <span>Meta: 80 horas</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-hourglass-half"></i>
-                            <span>46 dias restantes</span>
-                        </div>
-                    </div>
-                    <div class="goal-actions">
-                        <button class="btn-action btn-view">
-                            <i class="fas fa-eye"></i> Detalhes
-                        </button>
-                        <button class="btn-action btn-update">
-                            <i class="fas fa-edit"></i> Atualizar
-                        </button>
-                        <button class="btn-action btn-delete">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Sample Goal 3 -->
-                <div class="goal-card" data-category="financas">
-                    <span class="goal-category-badge badge-financas">
-                        <i class="fas fa-dollar-sign"></i> Finanças
-                    </span>
-                    <div class="goal-header">
-                        <div>
-                            <h3 class="goal-title">Economizar R$ 5.000</h3>
-                            <div class="goal-dates">
-                                <span><i class="fas fa-calendar-alt"></i> Início: 01/11/2025</span>
-                                <span><i class="fas fa-calendar-check"></i> Fim: 31/03/2026</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="goal-description">
-                        Meta de economia para a viagem de férias no meio do ano.
-                    </p>
-                    <div class="progress-container">
-                        <div class="progress-label">
-                            <span>Progresso</span>
-                            <span>R$ 1.250 / R$ 5.000</span>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 25%">25%</div>
-                        </div>
-                    </div>
-                    <div class="goal-stats">
-                        <div class="stat-item">
-                            <i class="fas fa-flag-checkered"></i>
-                            <span>Meta: R$ 5.000</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-hourglass-half"></i>
-                            <span>136 dias restantes</span>
-                        </div>
-                    </div>
-                    <div class="goal-actions">
-                        <button class="btn-action btn-view">
-                            <i class="fas fa-eye"></i> Detalhes
-                        </button>
-                        <button class="btn-action btn-update">
-                            <i class="fas fa-edit"></i> Atualizar
-                        </button>
-                        <button class="btn-action btn-delete">
-                            <i class="fas fa-trash"></i> Excluir
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
-                    <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
+                    <p>Rastreador de desempenho pessoal.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="../Home/home.html">Home</a></li>
-                        <li><a href="../QS/qs.html">Quem Somos</a></li>
-                        <li><a href="../Cadastro/cadastro.html">Cadastro</a></li>
-                        <li><a href="../Relatorios/relatorios.html">Relatórios</a></li>
-                    </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Categorias</h4>
-                    <ul>
-                        <li><a href="#">Saúde & Fitness</a></li>
-                        <li><a href="#">Estudos & Carreira</a></li>
-                        <li><a href="#">Finanças Pessoais</a></li>
-                        <li><a href="#">Desenvolvimento Pessoal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
-                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
-                    </ul>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
             </div>
@@ -282,50 +134,158 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Filter functionality
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const goalCards = document.querySelectorAll('.goal-card');
 
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
+    <script type="module">
+        import { listarMetas } from '../js/api.js';
 
-                const filter = this.getAttribute('data-filter');
+        const usuarioId = 1;
 
-                goalCards.forEach(card => {
-                    if (filter === 'todas' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
+        window.addEventListener('load', async () => {
+            const containerActive = document.getElementById('goalsListActive');
+            const containerCompleted = document.getElementById('goalsListCompleted');
+            
+            try {
+                const resultado = await listarMetas(usuarioId);
+                
+                containerActive.innerHTML = '';
+                containerCompleted.innerHTML = '';
+
+                if (!resultado || !resultado.success || resultado.data.length === 0) {
+                    const msgVazio = `<div class="text-center py-5"><h3>Nenhuma meta encontrada</h3><a href="../Cadastro/cadastro.html" class="btn btn-primary mt-2">Criar Meta</a></div>`;
+                    containerActive.innerHTML = msgVazio;
+                    containerCompleted.innerHTML = '<p class="text-center py-5 text-muted">Nenhuma meta concluída ainda.</p>';
+                    return;
+                }
+
+                let temAtivas = false;
+                let temConcluidas = false;
+
+                resultado.data.forEach(meta => {
+                    const statusConcluido = isConcluida(meta);
+                    
+                    if (statusConcluido) {
+                        temConcluidas = true;
+                        // Cria card SEM botão de editar
+                        containerCompleted.innerHTML += criarHTMLCard(meta, true);
                     } else {
-                        card.style.display = 'none';
+                        temAtivas = true;
+                        // Cria card COM botão de editar
+                        containerActive.innerHTML += criarHTMLCard(meta, false);
                     }
                 });
-            });
+
+                if(!temAtivas) containerActive.innerHTML = '<p class="text-center p-5">Oba! Nenhuma meta pendente. Você completou tudo!</p>';
+                if(!temConcluidas) containerCompleted.innerHTML = '<p class="text-center p-5 text-muted">Complete suas metas para vê-las aqui.</p>';
+
+                ativarFiltros();
+
+            } catch (error) {
+                console.error(error);
+                containerActive.innerHTML = '<div class="alert alert-danger">Erro de conexão.</div>';
+            }
         });
 
-        // Action buttons
-        document.querySelectorAll('.btn-view').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert('Funcionalidade de visualização de detalhes será implementada!');
-            });
-        });
+        function isConcluida(meta) {
+            const progresso = parseFloat(meta.progresso || 0);
+            const valorTotal = parseFloat(meta.valor || 1);
+            return meta.status === 'concluida' || progresso >= valorTotal;
+        }
 
-        document.querySelectorAll('.btn-update').forEach(btn => {
-            btn.addEventListener('click', function() {
-                window.location.href = 'atualizacao.html';
-            });
-        });
+        function criarHTMLCard(meta, isCompleted) {
+            const progresso = parseFloat(meta.progresso || 0);
+            const valorTotal = parseFloat(meta.valor || 1);
+            const porcentagem = Math.round((progresso / valorTotal) * 100);
+            const dataFim = new Date(meta.data_conclusao).toLocaleDateString('pt-BR');
+            const config = getCategoriaConfig(meta.categoria);
 
-        document.querySelectorAll('.btn-delete').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if (confirm('Tem certeza que deseja excluir esta meta?')) {
-                    window.location.href = 'exclusao.html';
-                }
+            const barraClass = isCompleted ? 'bg-success' : '';
+            const badgeExtra = isCompleted ? '<span class="badge bg-success ms-2">Concluída</span>' : '';
+
+            let botoesHTML = '';
+            if (isCompleted) {
+                botoesHTML = `
+                    <button class="btn-action btn-delete w-100" onclick="window.location.href='../Exclusao/exclusao.html?id=${meta.id}'">
+                        <i class="fas fa-trash"></i> Excluir do Histórico
+                    </button>
+                `;
+            } else {
+                botoesHTML = `
+                    <button class="btn-action btn-update" onclick="window.location.href='../Atualização/atualizacao.html?id=${meta.id}'">
+                        <i class="fas fa-edit"></i> Atualizar
+                    </button>
+                    <button class="btn-action btn-delete" onclick="window.location.href='../Exclusao/exclusao.html?id=${meta.id}'">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                `;
+            }
+
+            return `
+                <div class="goal-card" data-category="${meta.categoria}">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="goal-category-badge ${config.badgeClass}">
+                            <i class="${config.icon}"></i> ${capitalize(meta.categoria)}
+                        </span>
+                        ${badgeExtra}
+                    </div>
+                    
+                    <h3 class="goal-title mt-2">${meta.titulo}</h3>
+                    <div class="goal-dates mb-3">
+                        <span><i class="fas fa-calendar-check"></i> Prazo: ${dataFim}</span>
+                    </div>
+                    
+                    <p class="goal-description text-muted small">
+                        ${meta.descricao || 'Sem descrição definida.'}
+                    </p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Progresso</span>
+                            <span>${progresso} / ${valorTotal} ${meta.unidade}</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar ${barraClass}" style="width: ${porcentagem}%">${porcentagem}%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-actions mt-3">
+                        ${botoesHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getCategoriaConfig(cat) {
+            switch(cat) {
+                case 'saude': return { badgeClass: 'badge-saude', icon: 'fas fa-heartbeat' };
+                case 'estudos': return { badgeClass: 'badge-estudos', icon: 'fas fa-graduation-cap' };
+                case 'financas': return { badgeClass: 'badge-financas', icon: 'fas fa-dollar-sign' };
+                default: return { badgeClass: 'badge-pessoal', icon: 'fas fa-user' };
+            }
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function ativarFiltros() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+                    
+                    const goalCards = document.querySelectorAll('#goalsListActive .goal-card');
+                    goalCards.forEach(card => {
+                        if (filter === 'todas' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
             });
-        });
+        }
     </script>
 </body>
 </html>

@@ -7,11 +7,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <!-- CSS Específico da Página -->
     <link rel="stylesheet" href="./relatorios.css">
+    <style>
+        /* CSS Extra para conquistas bloqueadas */
+        .achievement-card.locked {
+            opacity: 0.5;
+            filter: grayscale(100%);
+        }
+        .achievement-card.unlocked {
+            border: 2px solid var(--success);
+            transform: scale(1.02);
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../Home/home.html">
@@ -27,7 +36,7 @@
                         <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
+                        <a class="nav-link" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
@@ -42,14 +51,13 @@
                         <a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
+                        <a class="nav-link active" href="./relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1><i class="fas fa-chart-pie"></i> Relatórios e Estatísticas</h1>
@@ -57,16 +65,15 @@
         </div>
     </section>
 
-    <!-- Reports Section -->
     <section class="reports-section">
         <div class="container">
-            <!-- Stats Cards -->
+            
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon primary">
                         <i class="fas fa-bullseye"></i>
                     </div>
-                    <div class="stat-number">3</div>
+                    <div class="stat-number" id="statActive">0</div>
                     <div class="stat-label">Metas Ativas</div>
                 </div>
 
@@ -74,7 +81,7 @@
                     <div class="stat-icon success">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <div class="stat-number">7</div>
+                    <div class="stat-number" id="statCompleted">0</div>
                     <div class="stat-label">Metas Concluídas</div>
                 </div>
 
@@ -82,263 +89,82 @@
                     <div class="stat-icon warning">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <div class="stat-number">43%</div>
+                    <div class="stat-number" id="statAvgProgress">0%</div>
                     <div class="stat-label">Progresso Médio</div>
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-icon danger">
-                        <i class="fas fa-fire"></i>
+                        <i class="fas fa-layer-group"></i>
                     </div>
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Dias de Sequência</div>
+                    <div class="stat-number" id="statTotal">0</div>
+                    <div class="stat-label">Total de Metas</div>
                 </div>
             </div>
 
-            <!-- Category Reports -->
             <div class="category-reports">
                 <h2><i class="fas fa-layer-group"></i> Progresso por Categoria</h2>
-
-                <!-- Saúde -->
-                <div class="category-item">
-                    <div class="category-header">
-                        <div class="category-info">
-                            <div class="category-icon-badge badge-saude">
-                                <i class="fas fa-heartbeat"></i>
-                            </div>
-                            <div class="category-name">
-                                <h4>Saúde & Fitness</h4>
-                                <small>1 meta ativa</small>
-                            </div>
-                        </div>
-                        <div class="category-percentage">
-                            <div class="percentage-number">65%</div>
-                            <div class="percentage-label">Conclusão Média</div>
-                        </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar saude" style="width: 65%">65%</div>
-                    </div>
-                    <div class="category-stats">
-                        <div class="category-stat">
-                            <i class="fas fa-flag-checkered"></i>
-                            <span>Meta: 100 km</span>
-                        </div>
-                        <div class="category-stat">
-                            <i class="fas fa-running"></i>
-                            <span>Atual: 65 km</span>
-                        </div>
-                        <div class="category-stat">
-                            <i class="fas fa-trophy"></i>
-                            <span>2 metas concluídas</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Estudos -->
-                <div class="category-item">
-                    <div class="category-header">
-                        <div class="category-info">
-                            <div class="category-icon-badge badge-estudos">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <div class="category-name">
-                                <h4>Estudos & Carreira</h4>
-                                <small>1 meta ativa</small>
-                            </div>
-                        </div>
-                        <div class="category-percentage">
-                            <div class="percentage-number">40%</div>
-                            <div class="percentage-label">Conclusão Média</div>
-                        </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar estudos" style="width: 40%">40%</div>
-                    </div>
-                    <div class="category-stats">
-                        <div class="category-stat">
-                            <i class="fas fa-flag-checkered"></i>
-                            <span>Meta: 80 horas</span>
-                        </div>
-                        <div class="category-stat">
-                            <i class="fas fa-book"></i>
-                            <span>Atual: 32 horas</span>
-                        </div>
-                        <div class="category-stat">
-                            <i class="fas fa-trophy"></i>
-                            <span>3 metas concluídas</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Finanças -->
-                <div class="category-item">
-                    <div class="category-header">
-                        <div class="category-info">
-                            <div class="category-icon-badge badge-financas">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                            <div class="category-name">
-                                <h4>Finanças Pessoais</h4>
-                                <small>1 meta ativa</small>
-                            </div>
-                        </div>
-                        <div class="category-percentage">
-                            <div class="percentage-number">25%</div>
-                            <div class="percentage-label">Conclusão Média</div>
-                        </div>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar financas" style="width: 25%">25%</div>
-                    </div>
-                    <div class="category-stats">
-                        <div class="category-stat">
-                            <i class="fas fa-flag-checkered"></i>
-                            <span>Meta: R$ 5.000</span>
-                        </div>
-                        <div class="category-stat">
-                            <i class="fas fa-piggy-bank"></i>
-                            <span>Atual: R$ 1.250</span>
-                        </div>
-                        <div class="category-stat">
-                            <i class="fas fa-trophy"></i>
-                            <span>2 metas concluídas</span>
-                        </div>
+                <div id="categoryReportsContainer">
+                    <div class="text-center p-5">
+                        <div class="spinner-border text-primary"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Recent Activity -->
             <div class="recent-activity">
-                <h2><i class="fas fa-history"></i> Atividades Recentes</h2>
-
-                <div class="activity-item">
-                    <div class="activity-icon success">
-                        <i class="fas fa-plus-circle"></i>
+                <h2><i class="fas fa-history"></i> Metas Recentes</h2>
+                <div id="recentActivityContainer">
                     </div>
-                    <div class="activity-content">
-                        <div class="activity-title">Progresso adicionado</div>
-                        <div class="activity-details">5 km adicionados em "Correr 100 km este mês"</div>
-                    </div>
-                    <div class="activity-time">Hoje, 14:30</div>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon primary">
-                        <i class="fas fa-edit"></i>
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-title">Meta atualizada</div>
-                        <div class="activity-details">2 horas de estudo registradas</div>
-                    </div>
-                    <div class="activity-time">Ontem, 19:15</div>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon success">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-title">Meta concluída!</div>
-                        <div class="activity-details">"Ler 5 livros este mês" foi completada</div>
-                    </div>
-                    <div class="activity-time">2 dias atrás</div>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon primary">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                    <div class="activity-content">
-                        <div class="activity-title">Nova meta criada</div>
-                        <div class="activity-details">"Economizar R$ 5.000" foi adicionada</div>
-                    </div>
-                    <div class="activity-time">5 dias atrás</div>
-                </div>
             </div>
 
-            <!-- Achievements -->
             <div class="achievements-section">
                 <h2><i class="fas fa-award"></i> Conquistas Desbloqueadas</h2>
 
-                <div class="achievements-grid">
-                    <div class="achievement-card">
+                <div class="achievements-grid" id="achievementsContainer">
+                    <div class="achievement-card locked" id="achievFirst">
                         <div class="achievement-badge">
                             <i class="fas fa-star"></i>
                         </div>
                         <div class="achievement-title">Primeiro Passo</div>
-                        <div class="achievement-desc">Primeira meta criada</div>
+                        <div class="achievement-desc">Criou a primeira meta</div>
                     </div>
 
-                    <div class="achievement-card">
+                    <div class="achievement-card locked" id="achievMid">
                         <div class="achievement-badge">
-                            <i class="fas fa-fire"></i>
+                            <i class="fas fa-rocket"></i>
                         </div>
-                        <div class="achievement-title">Em Chamas</div>
-                        <div class="achievement-desc">15 dias de sequência</div>
+                        <div class="achievement-title">Acelerando</div>
+                        <div class="achievement-desc">Alcançou 50% em uma meta</div>
                     </div>
 
-                    <div class="achievement-card">
+                    <div class="achievement-card locked" id="achievWinner">
                         <div class="achievement-badge">
                             <i class="fas fa-trophy"></i>
                         </div>
                         <div class="achievement-title">Vencedor</div>
-                        <div class="achievement-desc">5 metas concluídas</div>
+                        <div class="achievement-desc">Concluiu 1 meta</div>
                     </div>
 
-                    <div class="achievement-card">
+                    <div class="achievement-card locked" id="achievMaster">
                         <div class="achievement-badge">
-                            <i class="fas fa-rocket"></i>
+                            <i class="fas fa-crown"></i>
                         </div>
-                        <div class="achievement-title">Foguete</div>
-                        <div class="achievement-desc">Meta 90% completa</div>
+                        <div class="achievement-title">Mestre</div>
+                        <div class="achievement-desc">Concluiu 3 metas</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
                     <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="../Home/home.html">Home</a></li>
-                        <li><a href="../QS/qs.html">Quem Somos</a></li>
-                        <li><a href="../Cadastro/cadastro.html">Cadastro</a></li>
-                        <li><a href="./relatorios.html">Relatórios</a></li>
-                    </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Categorias</h4>
-                    <ul>
-                        <li><a href="#">Saúde & Fitness</a></li>
-                        <li><a href="#">Estudos & Carreira</a></li>
-                        <li><a href="#">Finanças Pessoais</a></li>
-                        <li><a href="#">Desenvolvimento Pessoal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
-                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
-                    </ul>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
             </div>
@@ -346,5 +172,227 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { listarMetas } from '../js/api.js';
+
+        const usuarioId = 1;
+
+        window.addEventListener('load', async () => {
+            try {
+                const resultado = await listarMetas(usuarioId);
+                
+                if (resultado && resultado.success) {
+                    const metas = resultado.data;
+                    calcularEstatisticasGerais(metas);
+                    gerarRelatorioCategorias(metas);
+                    gerarAtividadeRecente(metas);
+                    verificarConquistas(metas);
+                } else {
+                    document.getElementById('categoryReportsContainer').innerHTML = '<p class="text-muted">Nenhum dado encontrado.</p>';
+                }
+            } catch (error) {
+                console.error("Erro ao carregar relatórios", error);
+            }
+        });
+
+        // 1. Cards do Topo
+        function calcularEstatisticasGerais(metas) {
+            const total = metas.length;
+            const concluidas = metas.filter(m => isConcluida(m)).length;
+            const ativas = total - concluidas;
+
+            // Calcula média de progresso de TODAS as metas
+            let somaPorcentagens = 0;
+            metas.forEach(m => {
+                somaPorcentagens += calcularPorcentagem(m);
+            });
+            const mediaGeral = total > 0 ? Math.round(somaPorcentagens / total) : 0;
+
+            // Atualiza HTML
+            animateValue("statActive", 0, ativas, 1000);
+            animateValue("statCompleted", 0, concluidas, 1000);
+            document.getElementById('statAvgProgress').textContent = mediaGeral + "%";
+            animateValue("statTotal", 0, total, 1000);
+        }
+
+        // 2. Relatório por Categoria
+        function gerarRelatorioCategorias(metas) {
+            const container = document.getElementById('categoryReportsContainer');
+            container.innerHTML = '';
+
+            const categorias = ['saude', 'estudos', 'financas', 'pessoal'];
+            let temAlgumaCategoria = false;
+
+            categorias.forEach(cat => {
+                // Filtra metas desta categoria
+                const metasCat = metas.filter(m => m.categoria === cat);
+                
+                if (metasCat.length > 0) {
+                    temAlgumaCategoria = true;
+                    // Cálculos da categoria
+                    const totalCat = metasCat.length;
+                    let somaPorcCat = 0;
+                    let totalAlvo = 0;
+                    let totalAtual = 0;
+
+                    metasCat.forEach(m => {
+                        somaPorcCat += calcularPorcentagem(m);
+                        totalAlvo += parseFloat(m.valor || 0);
+                        totalAtual += parseFloat(m.progresso || 0);
+                    });
+
+                    const mediaCat = Math.round(somaPorcCat / totalCat);
+                    const config = getCatConfig(cat);
+
+                    // HTML do Item
+                    const html = `
+                        <div class="category-item">
+                            <div class="category-header">
+                                <div class="category-info">
+                                    <div class="category-icon-badge ${config.badge}">
+                                        <i class="fas ${config.icon}"></i>
+                                    </div>
+                                    <div class="category-name">
+                                        <h4>${config.nome}</h4>
+                                        <small>${totalCat} meta(s) cadastrada(s)</small>
+                                    </div>
+                                </div>
+                                <div class="category-percentage">
+                                    <div class="percentage-number">${mediaCat}%</div>
+                                    <div class="percentage-label">Média</div>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar ${config.colorClass}" style="width: ${mediaCat}%"></div>
+                            </div>
+                            <div class="category-stats">
+                                <div class="category-stat">
+                                    <i class="fas fa-flag-checkered"></i>
+                                    <span>Total Alvo: ${formatMoney(totalAlvo)}</span>
+                                </div>
+                                <div class="category-stat">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Total Atual: ${formatMoney(totalAtual)}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                }
+            });
+
+            if (!temAlgumaCategoria) {
+                container.innerHTML = '<p class="text-center p-4">Cadastre metas para ver os relatórios por categoria.</p>';
+            }
+        }
+
+        // 3. Atividade Recente (Últimas 3 metas criadas)
+        function gerarAtividadeRecente(metas) {
+            const container = document.getElementById('recentActivityContainer');
+            container.innerHTML = '';
+
+            // Ordena por ID decrescente (as últimas criadas primeiro)
+            const recentes = [...metas].sort((a, b) => b.id - a.id).slice(0, 3);
+
+            recentes.forEach(meta => {
+                const dataCriacao = new Date(meta.criado_em || new Date()).toLocaleDateString('pt-BR');
+                const porcentagem = calcularPorcentagem(meta);
+
+                let iconClass = 'primary';
+                let icon = 'fa-plus';
+                let texto = 'Meta criada';
+
+                if (isConcluida(meta)) {
+                    iconClass = 'success';
+                    icon = 'fa-trophy';
+                    texto = 'Meta Concluída!';
+                } else if (porcentagem > 0) {
+                    iconClass = 'warning';
+                    icon = 'fa-running';
+                    texto = 'Em andamento';
+                }
+
+                const html = `
+                    <div class="activity-item">
+                        <div class="activity-icon ${iconClass}">
+                            <i class="fas ${icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">${texto}</div>
+                            <div class="activity-details">"${meta.titulo}" - ${porcentagem}%</div>
+                        </div>
+                        <div class="activity-time">${dataCriacao}</div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // 4. Sistema de Conquistas
+        function verificarConquistas(metas) {
+            const concluidas = metas.filter(m => isConcluida(m)).length;
+            const total = metas.length;
+            const maxPorcentagem = Math.max(...metas.map(m => calcularPorcentagem(m)), 0);
+
+            // Regras
+            unlockIf('achievFirst', total >= 1);
+            unlockIf('achievMid', maxPorcentagem >= 50);
+            unlockIf('achievWinner', concluidas >= 1);
+            unlockIf('achievMaster', concluidas >= 3);
+        }
+
+        function unlockIf(elementId, condition) {
+            const el = document.getElementById(elementId);
+            if (condition) {
+                el.classList.remove('locked');
+                el.classList.add('unlocked');
+                el.querySelector('.achievement-desc').innerHTML += ' <span class="text-success">(Desbloqueado!)</span>';
+            }
+        }
+
+        // Utilitários
+        function isConcluida(meta) {
+            // Considera concluída se status for 'concluida' OU se atingiu 100%
+            const pct = calcularPorcentagem(meta);
+            return meta.status === 'concluida' || pct >= 100;
+        }
+
+        function calcularPorcentagem(meta) {
+            const atual = parseFloat(meta.progresso || 0);
+            const total = parseFloat(meta.valor || 1);
+            let pct = (atual / total) * 100;
+            return pct > 100 ? 100 : Math.round(pct);
+        }
+
+        function getCatConfig(cat) {
+            switch(cat) {
+                case 'saude': return { badge: 'badge-saude', icon: 'fa-heartbeat', nome: 'Saúde', colorClass: 'bg-danger' };
+                case 'estudos': return { badge: 'badge-estudos', icon: 'fa-graduation-cap', nome: 'Estudos', colorClass: 'bg-info' };
+                case 'financas': return { badge: 'badge-financas', icon: 'fa-dollar-sign', nome: 'Finanças', colorClass: 'bg-success' };
+                default: return { badge: 'badge-pessoal', icon: 'fa-user', nome: 'Pessoal', colorClass: 'bg-secondary' };
+            }
+        }
+
+        function formatMoney(value) {
+            // Formatação simples para números grandes
+            if (value >= 1000) return (value/1000).toFixed(1) + 'k';
+            return Math.round(value);
+        }
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
 </body>
 </html>

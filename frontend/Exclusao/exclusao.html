@@ -7,11 +7,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <!-- CSS Específico da Página -->
     <link rel="stylesheet" href="./exclusao.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../Home/home.html">
@@ -49,7 +47,6 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1><i class="fas fa-trash-alt"></i> Excluir Metas</h1>
@@ -57,11 +54,9 @@
         </div>
     </section>
 
-    <!-- Delete Section -->
     <section class="delete-section">
         <div class="container">
             <div class="delete-container">
-                <!-- Warning Card -->
                 <div class="warning-card">
                     <h4><i class="fas fa-exclamation-triangle"></i> Atenção!</h4>
                     <p>Ao excluir uma meta, você perderá permanentemente:</p>
@@ -75,108 +70,13 @@
 
                 <div id="alertContainer"></div>
 
-                <!-- Goals List -->
                 <div class="goals-card">
                     <h2><i class="fas fa-list"></i> Suas Metas</h2>
 
                     <div id="goalsList">
-                        <!-- Goal 1 -->
-                        <div class="goal-delete-item" data-goal-id="1">
-                            <div class="goal-header">
-                                <div class="goal-info">
-                                    <h4>Correr 100 km este mês</h4>
-                                    <span class="goal-category category-saude">
-                                        <i class="fas fa-heartbeat"></i> Saúde
-                                    </span>
-                                </div>
-                            </div>
-                            <p class="goal-details">
-                                Meta de correr 100 km durante o mês de novembro para melhorar condicionamento físico.
-                            </p>
-                            <div class="goal-stats">
-                                <div class="stat">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Progresso: 65 / 100 km (65%)</span>
-                                </div>
-                                <div class="stat">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>Criado em: 01/11/2025</span>
-                                </div>
-                            </div>
-                            <div class="delete-actions">
-                                <button class="btn-delete-goal" onclick="confirmDelete(1, 'Correr 100 km este mês')">
-                                    <i class="fas fa-trash-alt"></i> Excluir Meta
-                                </button>
-                                <a href="../Consulta/consulta.html" class="btn-cancel">
-                                    <i class="fas fa-eye"></i> Visualizar
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Goal 2 -->
-                        <div class="goal-delete-item" data-goal-id="2">
-                            <div class="goal-header">
-                                <div class="goal-info">
-                                    <h4>Estudar 80 horas de programação</h4>
-                                    <span class="goal-category category-estudos">
-                                        <i class="fas fa-graduation-cap"></i> Estudos
-                                    </span>
-                                </div>
-                            </div>
-                            <p class="goal-details">
-                                Dedicar 80 horas ao estudo de desenvolvimento web e tecnologias relacionadas.
-                            </p>
-                            <div class="goal-stats">
-                                <div class="stat">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Progresso: 32 / 80 horas (40%)</span>
-                                </div>
-                                <div class="stat">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>Criado em: 01/11/2025</span>
-                                </div>
-                            </div>
-                            <div class="delete-actions">
-                                <button class="btn-delete-goal" onclick="confirmDelete(2, 'Estudar 80 horas de programação')">
-                                    <i class="fas fa-trash-alt"></i> Excluir Meta
-                                </button>
-                                <a href="../Consulta/consulta.html" class="btn-cancel">
-                                    <i class="fas fa-eye"></i> Visualizar
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Goal 3 -->
-                        <div class="goal-delete-item" data-goal-id="3">
-                            <div class="goal-header">
-                                <div class="goal-info">
-                                    <h4>Economizar R$ 5.000</h4>
-                                    <span class="goal-category category-financas">
-                                        <i class="fas fa-dollar-sign"></i> Finanças
-                                    </span>
-                                </div>
-                            </div>
-                            <p class="goal-details">
-                                Meta de economia para a viagem de férias no meio do ano.
-                            </p>
-                            <div class="goal-stats">
-                                <div class="stat">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Progresso: R$ 1.250 / R$ 5.000 (25%)</span>
-                                </div>
-                                <div class="stat">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span>Criado em: 01/11/2025</span>
-                                </div>
-                            </div>
-                            <div class="delete-actions">
-                                <button class="btn-delete-goal" onclick="confirmDelete(3, 'Economizar R$ 5.000')">
-                                    <i class="fas fa-trash-alt"></i> Excluir Meta
-                                </button>
-                                <a href="../Consulta/consulta.html" class="btn-cancel">
-                                    <i class="fas fa-eye"></i> Visualizar
-                                </a>
-                            </div>
+                        <div class="text-center p-5">
+                            <div class="spinner-border text-danger" role="status"></div>
+                            <p class="mt-2">Carregando metas...</p>
                         </div>
                     </div>
                 </div>
@@ -184,7 +84,6 @@
         </div>
     </section>
 
-    <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -203,7 +102,7 @@
                     <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">
                         <i class="fas fa-times"></i> Cancelar
                     </button>
-                    <button type="button" class="btn-confirm-delete" onclick="deleteGoal()">
+                    <button type="button" class="btn-confirm-delete" id="btnConfirmDelete">
                         <i class="fas fa-trash-alt"></i> Sim, Excluir
                     </button>
                 </div>
@@ -211,47 +110,14 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
                     <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="../Home/home.html">Home</a></li>
-                        <li><a href="../QS/qs.html">Quem Somos</a></li>
-                        <li><a href="../Cadastro/cadastro.html">Cadastro</a></li>
-                        <li><a href="../Relatorios/relatorios.html">Relatórios</a></li>
-                    </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Categorias</h4>
-                    <ul>
-                        <li><a href="#">Saúde & Fitness</a></li>
-                        <li><a href="#">Estudos & Carreira</a></li>
-                        <li><a href="#">Finanças Pessoais</a></li>
-                        <li><a href="#">Desenvolvimento Pessoal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
-                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
-                    </ul>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
             </div>
@@ -259,46 +125,155 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        let goalToDelete = null;
-        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    
+    <script type="module">
+        import { listarMetas, deletarMeta } from '../js/api.js';
 
-        function confirmDelete(goalId, goalTitle) {
-            goalToDelete = goalId;
-            document.getElementById('deleteGoalTitle').textContent = goalTitle;
-            deleteModal.show();
+        let metaParaExcluirId = null;
+        // Inicializa o modal do Bootstrap via JS
+        const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        const usuarioId = 1;
+
+        // Ao carregar a página
+        window.addEventListener('load', async () => {
+            await carregarMetas();
+
+            // Se a URL tiver ?id=X, já abre o modal de confirmação para esse ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const idUrl = urlParams.get('id');
+            
+            if (idUrl) {
+                // Pequeno delay para garantir que a lista carregou
+                setTimeout(() => {
+                    const botaoExcluir = document.querySelector(`button[data-id="${idUrl}"]`);
+                    if (botaoExcluir) {
+                        botaoExcluir.click(); // Simula o clique no botão de excluir
+                        // Rola a página até o item
+                        botaoExcluir.closest('.goal-delete-item').scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 500);
+            }
+        });
+
+        async function carregarMetas() {
+            const container = document.getElementById('goalsList');
+            
+            try {
+                const resultado = await listarMetas(usuarioId);
+                container.innerHTML = '';
+
+                if (!resultado || !resultado.success || resultado.data.length === 0) {
+                    mostrarSemMetas(container);
+                    return;
+                }
+
+                resultado.data.forEach(meta => {
+                    const html = criarItemHTML(meta);
+                    container.innerHTML += html;
+                });
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = '<div class="alert alert-danger">Erro ao carregar metas.</div>';
+            }
         }
 
-        function deleteGoal() {
-            if (goalToDelete) {
-                // Aqui você faria a requisição para o backend
-                console.log('Excluindo meta:', goalToDelete);
+        function criarItemHTML(meta) {
+            // Configurações visuais (ícones, cores)
+            const progresso = parseFloat(meta.progresso || 0);
+            const alvo = parseFloat(meta.valor || 1);
+            const porcentagem = Math.round((progresso / alvo) * 100);
+            const dataCriacao = new Date(meta.criado_em || new Date()).toLocaleDateString('pt-BR');
 
-                // Remover o elemento da lista
-                const goalElement = document.querySelector(`[data-goal-id="${goalToDelete}"]`);
-                if (goalElement) {
-                    goalElement.remove();
-                }
+            let classeCat = 'category-pessoal';
+            let icone = 'fa-user';
+            
+            if (meta.categoria === 'saude') { classeCat = 'category-saude'; icone = 'fa-heartbeat'; }
+            if (meta.categoria === 'estudos') { classeCat = 'category-estudos'; icone = 'fa-graduation-cap'; }
+            if (meta.categoria === 'financas') { classeCat = 'category-financas'; icone = 'fa-dollar-sign'; }
 
-                deleteModal.hide();
-                showAlert('Meta excluída com sucesso!', 'success');
-
-                // Verificar se ainda há metas
-                if (document.querySelectorAll('.goal-delete-item').length === 0) {
-                    document.getElementById('goalsList').innerHTML = `
-                        <div class="no-goals">
-                            <i class="fas fa-check-circle"></i>
-                            <h3>Nenhuma meta para excluir</h3>
-                            <p>Você não possui metas cadastradas no momento</p>
-                            <a href="cadastro.html" class="btn btn-primary">
-                                <i class="fas fa-plus"></i> Criar Nova Meta
-                            </a>
+            // IMPORTANTE: O botão de excluir chama window.prepararExclusao
+            return `
+                <div class="goal-delete-item" id="meta-row-${meta.id}">
+                    <div class="goal-header">
+                        <div class="goal-info">
+                            <h4>${meta.titulo}</h4>
+                            <span class="goal-category ${classeCat}">
+                                <i class="fas ${icone}"></i> ${meta.categoria.toUpperCase()}
+                            </span>
                         </div>
-                    `;
-                }
+                    </div>
+                    <p class="goal-details">
+                        ${meta.descricao || 'Sem descrição.'}
+                    </p>
+                    <div class="goal-stats">
+                        <div class="stat">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Progresso: ${progresso} / ${alvo} ${meta.unidade} (${porcentagem}%)</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Criado em: ${dataCriacao}</span>
+                        </div>
+                    </div>
+                    <div class="delete-actions">
+                        <button class="btn-delete-goal" onclick="window.prepararExclusao(${meta.id}, '${meta.titulo.replace(/'/g, "\\'")}')" data-id="${meta.id}">
+                            <i class="fas fa-trash-alt"></i> Excluir Meta
+                        </button>
+                        <a href="../Consulta/consulta.html" class="btn-cancel">
+                            <i class="fas fa-eye"></i> Visualizar
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
 
-                goalToDelete = null;
+        // Função global para ser chamada pelo onclick do HTML
+        window.prepararExclusao = function(id, titulo) {
+            metaParaExcluirId = id;
+            document.getElementById('deleteGoalTitle').textContent = titulo;
+            deleteModal.show();
+        };
+
+        // Função do botão "Sim, Excluir" do Modal
+        document.getElementById('btnConfirmDelete').addEventListener('click', async function() {
+            if (!metaParaExcluirId) return;
+
+            try {
+                const resultado = await deletarMeta(metaParaExcluirId);
+
+                if (resultado && (resultado.success || resultado.message)) {
+                    // Remove visualmente
+                    const elemento = document.getElementById(`meta-row-${metaParaExcluirId}`);
+                    if (elemento) elemento.remove();
+
+                    deleteModal.hide();
+                    showAlert('✅ Meta excluída com sucesso!', 'success');
+
+                    // Se não sobrou nada, mostra mensagem de vazio
+                    if (document.querySelectorAll('.goal-delete-item').length === 0) {
+                        mostrarSemMetas(document.getElementById('goalsList'));
+                    }
+                } else {
+                    showAlert('❌ Erro ao excluir meta.', 'danger');
+                }
+            } catch (error) {
+                console.error(error);
+                showAlert('Erro de conexão.', 'danger');
             }
+        });
+
+        function mostrarSemMetas(container) {
+            container.innerHTML = `
+                <div class="no-goals text-center p-5">
+                    <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                    <h3>Nenhuma meta para excluir</h3>
+                    <p>Você não possui metas cadastradas no momento</p>
+                    <a href="../Cadastro/cadastro.html" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Criar Nova Meta
+                    </a>
+                </div>
+            `;
         }
 
         function showAlert(message, type) {
@@ -310,10 +285,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
             alertContainer.appendChild(alert);
-
-            setTimeout(() => {
-                alert.remove();
-            }, 5000);
+            setTimeout(() => alert.remove(), 5000);
         }
     </script>
 </body>

@@ -7,100 +7,51 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
-    <!-- CSS Específico da Página -->
     <link rel="stylesheet" href="./atualizacao.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../Home/home.html">
-                <i class="fas fa-ghost"></i>
-                GhostTrack
+                <i class="fas fa-ghost"></i> GhostTrack
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Consulta/consulta.html"><i class="fas fa-search"></i> Consulta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./atualizacao.html"><i class="fas fa-edit"></i> Atualização</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Cadastro/cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Consulta/consulta.html"><i class="fas fa-search"></i> Consulta</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="./atualizacao.html"><i class="fas fa-edit"></i> Atualização</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Exclusao/exclusao.html"><i class="fas fa-trash"></i> Exclusão</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Relatorios/relatorios.html"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1><i class="fas fa-chart-line"></i> Atualizar Progresso</h1>
-            <p>Registre seus avanços e acompanhe sua evolução</p>
+            <p>Registre seus avanços nas metas ativas</p>
         </div>
     </section>
 
-    <!-- Update Section -->
     <section class="update-section">
         <div class="container">
             <div class="update-container">
-                <!-- Select Goal Card -->
+                
                 <div class="select-goal-card" id="selectGoalCard">
                     <h2><i class="fas fa-list"></i> Selecione a Meta</h2>
-                    <div class="goal-selector">
-                        <div class="goal-option" data-goal-id="1" data-current="65" data-target="100" data-unit="km">
-                            <div class="goal-info">
-                                <h4>Correr 100 km este mês</h4>
-                                <small><i class="fas fa-heartbeat"></i> Saúde</small>
-                            </div>
-                            <div class="goal-progress">
-                                <div class="progress-badge">65%</div>
-                                <small>65 / 100 km</small>
-                            </div>
-                        </div>
-
-                        <div class="goal-option" data-goal-id="2" data-current="32" data-target="80" data-unit="horas">
-                            <div class="goal-info">
-                                <h4>Estudar 80 horas de programação</h4>
-                                <small><i class="fas fa-graduation-cap"></i> Estudos</small>
-                            </div>
-                            <div class="goal-progress">
-                                <div class="progress-badge">40%</div>
-                                <small>32 / 80 horas</small>
-                            </div>
-                        </div>
-
-                        <div class="goal-option" data-goal-id="3" data-current="1250" data-target="5000" data-unit="reais">
-                            <div class="goal-info">
-                                <h4>Economizar R$ 5.000</h4>
-                                <small><i class="fas fa-dollar-sign"></i> Finanças</small>
-                            </div>
-                            <div class="goal-progress">
-                                <div class="progress-badge">25%</div>
-                                <small>R$ 1.250 / R$ 5.000</small>
-                            </div>
+                    <div class="goal-selector" id="goalSelectorContainer">
+                        <div class="text-center p-5">
+                            <div class="spinner-border text-primary"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Update Form Card -->
                 <div class="update-form-card" id="updateFormCard">
                     <div class="form-header">
                         <h3 id="selectedGoalTitle">Meta Selecionada</h3>
@@ -130,7 +81,6 @@
                                 <span class="unit-label" id="unitLabel">unidade</span>
                             </div>
                             <small class="text-muted">Quanto você progrediu desde a última atualização?</small>
-                            
                             <div class="quick-add-buttons">
                                 <button type="button" class="quick-add-btn" data-value="1">+1</button>
                                 <button type="button" class="quick-add-btn" data-value="5">+5</button>
@@ -140,120 +90,169 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="updateDate" class="form-label">
-                                <i class="fas fa-calendar-alt"></i> Data do Progresso
-                            </label>
+                            <label for="updateDate" class="form-label">Data do Progresso</label>
                             <input type="date" class="form-control" id="updateDate" required>
                         </div>
 
                         <div class="note-section">
-                            <label for="progressNote" class="form-label">
-                                <i class="fas fa-sticky-note"></i> Observações (opcional)
-                            </label>
-                            <textarea class="form-control" id="progressNote" rows="3" placeholder="Adicione observações sobre este progresso..."></textarea>
+                            <label for="progressNote" class="form-label">Observações (opcional)</label>
+                            <textarea class="form-control" id="progressNote" rows="3"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-submit">
-                            <i class="fas fa-save"></i> Salvar Progresso
-                        </button>
-                        <button type="button" class="btn btn-back" id="btnBack">
-                            <i class="fas fa-arrow-left"></i> Voltar para Seleção
-                        </button>
+                        <button type="submit" class="btn btn-submit"><i class="fas fa-save"></i> Salvar Progresso</button>
+                        <button type="button" class="btn btn-back" id="btnBack"><i class="fas fa-arrow-left"></i> Voltar</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4><i class="fas fa-ghost"></i> GhostTrack</h4>
-                    <p>Rastreador de desempenho pessoal para ajudar você a alcançar suas metas e objetivos.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Links Rápidos</h4>
-                    <ul>
-                        <li><a href="../Home/home.html">Home</a></li>
-                        <li><a href="../QS/qs.html">Quem Somos</a></li>
-                        <li><a href="../Cadastro/cadastro.html">Cadastro</a></li>
-                        <li><a href="../Relatorios/relatorios.html">Relatórios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Categorias</h4>
-                    <ul>
-                        <li><a href="#">Saúde & Fitness</a></li>
-                        <li><a href="#">Estudos & Carreira</a></li>
-                        <li><a href="#">Finanças Pessoais</a></li>
-                        <li><a href="#">Desenvolvimento Pessoal</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contato</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> contato@ghosttrack.com</li>
-                        <li><i class="fas fa-phone"></i> (21) 99999-9999</li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Gonçalo, RJ</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 GhostTrack. Todos os direitos reservados.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2025 GhostTrack.</p></div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
+    
+    <script type="module">
+        import { listarMetas, atualizarMeta } from '../js/api.js';
+
         let selectedGoal = null;
+        const usuarioId = 1;
 
-        // Goal selection
-        document.querySelectorAll('.goal-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.goal-option').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-
-                selectedGoal = {
-                    id: this.dataset.goalId,
-                    title: this.querySelector('h4').textContent,
-                    category: this.querySelector('small').textContent,
-                    current: parseFloat(this.dataset.current),
-                    target: parseFloat(this.dataset.target),
-                    unit: this.dataset.unit
-                };
-
-                document.getElementById('selectGoalCard').style.display = 'none';
-                document.getElementById('updateFormCard').classList.add('active');
-
-                document.getElementById('selectedGoalTitle').textContent = selectedGoal.title;
-                document.getElementById('selectedGoalCategory').textContent = selectedGoal.category;
-                document.getElementById('unitLabel').textContent = selectedGoal.unit;
-
-                const percentage = (selectedGoal.current / selectedGoal.target * 100).toFixed(0);
-                document.getElementById('currentProgressBar').style.width = percentage + '%';
-                document.getElementById('currentProgressBar').textContent = percentage + '%';
-                document.getElementById('currentValue').textContent = `${selectedGoal.current} ${selectedGoal.unit}`;
-                document.getElementById('targetValue').textContent = `${selectedGoal.target} ${selectedGoal.unit}`;
-            });
+        window.addEventListener('load', async () => {
+            await carregarMetas();
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const goalIdParam = urlParams.get('id');
+            if (goalIdParam) {
+                const metaAlvo = document.querySelector(`.goal-option[data-goal-id="${goalIdParam}"]`);
+                if (metaAlvo) metaAlvo.click();
+            }
         });
 
-        // Back button
+        async function carregarMetas() {
+            const container = document.getElementById('goalSelectorContainer');
+            if(!container) return; 
+
+            try {
+                const resultado = await listarMetas(usuarioId);
+                container.innerHTML = ''; 
+
+                if (!resultado || !resultado.success || resultado.data.length === 0) {
+                    container.innerHTML = '<p class="text-center p-4">Nenhuma meta encontrada.</p>';
+                    return;
+                }
+
+                // --- A MÁGICA ACONTECE AQUI ---
+                // Filtramos para mostrar APENAS metas que NÃO estão concluídas
+                const metasAtivas = resultado.data.filter(m => !isConcluida(m));
+
+                if (metasAtivas.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center p-4">
+                            <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                            <p>Parabéns! Todas as suas metas foram concluídas.</p>
+                            <a href="../Cadastro/cadastro.html" class="btn btn-outline-primary btn-sm">Criar Nova Meta</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                metasAtivas.forEach(meta => {
+                    const html = criarHTMLOpcao(meta);
+                    container.innerHTML += html;
+                });
+
+                adicionarEventosClique();
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = '<div class="alert alert-danger">Erro ao carregar lista.</div>';
+            }
+        }
+
+        // Função auxiliar para checar se está concluída
+        function isConcluida(meta) {
+            const progresso = parseFloat(meta.progresso || 0);
+            const valorTotal = parseFloat(meta.valor || 1);
+            return meta.status === 'concluida' || progresso >= valorTotal;
+        }
+
+        function criarHTMLOpcao(meta) {
+            const progresso = parseFloat(meta.progresso || 0);
+            const alvo = parseFloat(meta.valor || 1);
+            const porcentagem = Math.round((progresso / alvo) * 100);
+            
+            let icon = 'fa-user';
+            if(meta.categoria === 'saude') icon = 'fa-heartbeat';
+            if(meta.categoria === 'estudos') icon = 'fa-graduation-cap';
+            if(meta.categoria === 'financas') icon = 'fa-dollar-sign';
+
+            return `
+                <div class="goal-option" 
+                     data-goal-id="${meta.id}" 
+                     data-titulo="${meta.titulo}"
+                     data-descricao="${meta.descricao || ''}"
+                     data-categoria="${meta.categoria}"
+                     data-current="${progresso}" 
+                     data-target="${alvo}" 
+                     data-unit="${meta.unidade}">
+                    
+                    <div class="goal-info">
+                        <h4>${meta.titulo}</h4>
+                        <small><i class="fas ${icon}"></i> ${meta.categoria.toUpperCase()}</small>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-badge">${porcentagem}%</div>
+                        <small>${progresso} / ${alvo} ${meta.unidade}</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        function adicionarEventosClique() {
+            document.querySelectorAll('.goal-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.goal-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    selectedGoal = {
+                        id: this.dataset.goalId,
+                        title: this.dataset.titulo,
+                        description: this.dataset.descricao,
+                        category: this.dataset.categoria,
+                        current: parseFloat(this.dataset.current),
+                        target: parseFloat(this.dataset.target),
+                        unit: this.dataset.unit
+                    };
+
+                    document.getElementById('selectGoalCard').style.display = 'none';
+                    document.getElementById('updateFormCard').classList.add('active');
+
+                    document.getElementById('selectedGoalTitle').textContent = selectedGoal.title;
+                    document.getElementById('selectedGoalCategory').textContent = selectedGoal.category.toUpperCase();
+                    document.getElementById('unitLabel').textContent = selectedGoal.unit;
+
+                    const percentage = Math.round((selectedGoal.current / selectedGoal.target) * 100);
+                    const bar = document.getElementById('currentProgressBar');
+                    bar.style.width = percentage + '%';
+                    bar.textContent = percentage + '%';
+                    
+                    document.getElementById('currentValue').textContent = `${selectedGoal.current} ${selectedGoal.unit}`;
+                    document.getElementById('targetValue').textContent = `${selectedGoal.target} ${selectedGoal.unit}`;
+                });
+            });
+        }
+
         document.getElementById('btnBack').addEventListener('click', function() {
             document.getElementById('selectGoalCard').style.display = 'block';
             document.getElementById('updateFormCard').classList.remove('active');
             document.getElementById('updateForm').reset();
+            window.history.pushState({}, document.title, window.location.pathname);
         });
 
-        // Quick add buttons
         document.querySelectorAll('.quick-add-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const value = parseFloat(this.dataset.value);
@@ -263,19 +262,35 @@
             });
         });
 
-        // Form submission
-        document.getElementById('updateForm').addEventListener('submit', function(e) {
+        document.getElementById('updateForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (!selectedGoal) return;
 
-            const progressValue = parseFloat(document.getElementById('progressValue').value);
-            const newProgress = selectedGoal.current + progressValue;
-            const percentage = (newProgress / selectedGoal.target * 100).toFixed(0);
+            const addValue = parseFloat(document.getElementById('progressValue').value);
+            const newProgress = selectedGoal.current + addValue;
+            
+            let novoStatus = 'em_andamento';
+            if (newProgress >= selectedGoal.target) novoStatus = 'concluida';
 
-            showAlert(`Progresso atualizado com sucesso! Novo progresso: ${newProgress} / ${selectedGoal.target} ${selectedGoal.unit} (${percentage}%)`, 'success');
+            try {
+                const resultado = await atualizarMeta(
+                    selectedGoal.id,
+                    selectedGoal.title,
+                    selectedGoal.description,
+                    novoStatus,
+                    newProgress
+                );
 
-            setTimeout(() => {
-                window.location.href = 'consulta.html';
-            }, 2000);
+                if (resultado && (resultado.success || resultado.message)) {
+                    showAlert('✅ Progresso salvo! ' + (novoStatus === 'concluida' ? '🎉 Meta Concluída!' : ''), 'success');
+                    setTimeout(() => window.location.href = '../Consulta/consulta.html', 2000);
+                } else {
+                    showAlert('Erro ao atualizar.', 'danger');
+                }
+            } catch (error) {
+                console.error(error);
+                showAlert('Erro de conexão.', 'danger');
+            }
         });
 
         function showAlert(message, type) {
@@ -287,13 +302,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
             alertContainer.appendChild(alert);
-
-            setTimeout(() => {
-                alert.remove();
-            }, 5000);
+            setTimeout(() => alert.remove(), 5000);
         }
 
-        // Set date to today
         document.getElementById('updateDate').valueAsDate = new Date();
     </script>
 </body>

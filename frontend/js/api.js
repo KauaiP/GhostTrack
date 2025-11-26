@@ -1,89 +1,101 @@
-const API_URL = "http://localhost/TrabalhoDevWeb/backend/api";
+// A URL agora aponta para o servidor PHP rodando na porta 8000
+const API_URL = "http://localhost:8000/backend/api";
 
 // -----------------------
 //     USUÁRIOS
 // -----------------------
 
-// Criar usuário
 export async function criarUsuario(nome, email, senha) {
-    const resposta = await fetch(`${API_URL}/usuarios.php`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, email, senha })
-    });
-
-    return resposta.json();
+    try {
+        const resposta = await fetch(`${API_URL}/usuarios.php`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nome, email, senha })
+        });
+        return await resposta.json();
+    } catch (error) {
+        console.error("Erro ao criar usuário:", error);
+    }
 }
 
-// Listar usuários
 export async function listarUsuarios() {
-    const resposta = await fetch(`${API_URL}/usuarios.php`);
-    return resposta.json();
+    try {
+        const resposta = await fetch(`${API_URL}/usuarios.php`);
+        return await resposta.json();
+    } catch (error) {
+        console.error("Erro ao listar usuários:", error);
+    }
 }
-
-// Atualizar usuário
-export async function atualizarUsuario(id, nome, email, senha) {
-    const resposta = await fetch(`${API_URL}/usuarios.php`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, nome, email, senha })
-    });
-
-    return resposta.json();
-}
-
-// Deletar usuário
-export async function deletarUsuario(id) {
-    const resposta = await fetch(`${API_URL}/usuarios.php`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id })
-    });
-
-    return resposta.json();
-}
-
-
 
 // -----------------------
 //        METAS
 // -----------------------
 
 // Criar meta
+// Ajustei para receber todos os campos que seu banco suporta
 export async function criarMeta(usuario_id, titulo, descricao, categoria, valor, unidade, data_inicio, data_conclusao, progresso) {
-    const resposta = await fetch(`${API_URL}/metas.php`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usuario_id, titulo, descricao, categoria, valor, unidade, data_inicio, data_conclusao, progresso})
-    });
-
-    return resposta.json();
+    try {
+        const resposta = await fetch(`${API_URL}/metas.php`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                usuario_id, 
+                titulo, 
+                descricao, 
+                categoria, 
+                valor, 
+                unidade, 
+                data_inicio, 
+                data_conclusao, 
+                progresso
+            })
+        });
+        return await resposta.json();
+    } catch (error) {
+        console.error("Erro ao criar meta:", error);
+    }
 }
 
-// Listar metas
-export async function listarMetas() {
-    const resposta = await fetch(`${API_URL}/metas.php`);
-    return resposta.json();
+// CORREÇÃO CRÍTICA: O PHP exige usuario_id no GET para saber de quem são as metas
+export async function listarMetas(usuario_id) {
+    try {
+        const resposta = await fetch(`${API_URL}/metas.php?usuario_id=${usuario_id}`);
+        return await resposta.json();
+    } catch (error) {
+        console.error("Erro ao listar metas:", error);
+    }
 }
 
-// Atualizar meta
-export async function atualizarMeta(usuario_id, titulo, descricao, categoria, valor, unidade, data_inicio, data_conclusao, progresso) {
-    const resposta = await fetch(`${API_URL}/metas.php`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ usuario_id, titulo, descricao, categoria, valor, unidade, data_inicio, data_conclusao, progresso })
-    });
-
-    return resposta.json();
+// CORREÇÃO CRÍTICA: O PHP precisa do ID da meta para atualizar, não do usuario_id
+export async function atualizarMeta(id, titulo, descricao, status, progresso) {
+    try {
+        const resposta = await fetch(`${API_URL}/metas.php`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                id, 
+                titulo, 
+                descricao, 
+                status, 
+                progresso 
+            })
+        });
+        return await resposta.json();
+    } catch (error) {
+        console.error("Erro ao atualizar meta:", error);
+    }
 }
 
 // Deletar meta
 export async function deletarMeta(id) {
-    const resposta = await fetch(`${API_URL}/metas.php`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id })
-    });
-
-    return resposta.json();
+    try {
+        const resposta = await fetch(`${API_URL}/metas.php`, {
+            method: "DELETE", // Alguns servidores exigem body no DELETE, outros aceitam na URL
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id })
+        });
+        return await resposta.json();
+    } catch (error) {
+        console.error("Erro ao deletar meta:", error);
+    }
 }
