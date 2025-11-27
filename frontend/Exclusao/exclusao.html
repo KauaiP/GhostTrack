@@ -129,10 +129,18 @@
     <script type="module">
         import { listarMetas, deletarMeta } from '../js/api.js';
 
+        // --- VERIFICAÇÃO DE LOGIN ---
+        const userData = localStorage.getItem('usuario_ghosttrack');
+        if (!userData) {
+            window.location.href = '../Login/index.html';
+            throw new Error("Usuário não logado");
+        }
+        const usuarioLogado = JSON.parse(userData);
+        const usuarioId = usuarioLogado.id;
+        // ----------------------------
+
         let metaParaExcluirId = null;
-        // Inicializa o modal do Bootstrap via JS
         const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-        const usuarioId = 1;
 
         // Ao carregar a página
         window.addEventListener('load', async () => {
@@ -143,12 +151,10 @@
             const idUrl = urlParams.get('id');
             
             if (idUrl) {
-                // Pequeno delay para garantir que a lista carregou
                 setTimeout(() => {
                     const botaoExcluir = document.querySelector(`button[data-id="${idUrl}"]`);
                     if (botaoExcluir) {
-                        botaoExcluir.click(); // Simula o clique no botão de excluir
-                        // Rola a página até o item
+                        botaoExcluir.click(); 
                         botaoExcluir.closest('.goal-delete-item').scrollIntoView({ behavior: 'smooth' });
                     }
                 }, 500);
@@ -179,7 +185,6 @@
         }
 
         function criarItemHTML(meta) {
-            // Configurações visuais (ícones, cores)
             const progresso = parseFloat(meta.progresso || 0);
             const alvo = parseFloat(meta.valor || 1);
             const porcentagem = Math.round((progresso / alvo) * 100);
@@ -192,7 +197,6 @@
             if (meta.categoria === 'estudos') { classeCat = 'category-estudos'; icone = 'fa-graduation-cap'; }
             if (meta.categoria === 'financas') { classeCat = 'category-financas'; icone = 'fa-dollar-sign'; }
 
-            // IMPORTANTE: O botão de excluir chama window.prepararExclusao
             return `
                 <div class="goal-delete-item" id="meta-row-${meta.id}">
                     <div class="goal-header">
@@ -228,14 +232,12 @@
             `;
         }
 
-        // Função global para ser chamada pelo onclick do HTML
         window.prepararExclusao = function(id, titulo) {
             metaParaExcluirId = id;
             document.getElementById('deleteGoalTitle').textContent = titulo;
             deleteModal.show();
         };
 
-        // Função do botão "Sim, Excluir" do Modal
         document.getElementById('btnConfirmDelete').addEventListener('click', async function() {
             if (!metaParaExcluirId) return;
 
@@ -243,14 +245,12 @@
                 const resultado = await deletarMeta(metaParaExcluirId);
 
                 if (resultado && (resultado.success || resultado.message)) {
-                    // Remove visualmente
                     const elemento = document.getElementById(`meta-row-${metaParaExcluirId}`);
                     if (elemento) elemento.remove();
 
                     deleteModal.hide();
                     showAlert('✅ Meta excluída com sucesso!', 'success');
 
-                    // Se não sobrou nada, mostra mensagem de vazio
                     if (document.querySelectorAll('.goal-delete-item').length === 0) {
                         mostrarSemMetas(document.getElementById('goalsList'));
                     }

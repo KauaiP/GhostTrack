@@ -176,7 +176,15 @@
     <script type="module">
         import { listarMetas } from '../js/api.js';
 
-        const usuarioId = 1;
+        // --- VERIFICAÇÃO DE LOGIN ---
+        const userData = localStorage.getItem('usuario_ghosttrack');
+        if (!userData) {
+            window.location.href = '../Login/index.html';
+            throw new Error("Usuário não logado");
+        }
+        const usuarioLogado = JSON.parse(userData);
+        const usuarioId = usuarioLogado.id;
+        // ----------------------------
 
         window.addEventListener('load', async () => {
             try {
@@ -202,14 +210,12 @@
             const concluidas = metas.filter(m => isConcluida(m)).length;
             const ativas = total - concluidas;
 
-            // Calcula média de progresso de TODAS as metas
             let somaPorcentagens = 0;
             metas.forEach(m => {
                 somaPorcentagens += calcularPorcentagem(m);
             });
             const mediaGeral = total > 0 ? Math.round(somaPorcentagens / total) : 0;
 
-            // Atualiza HTML
             animateValue("statActive", 0, ativas, 1000);
             animateValue("statCompleted", 0, concluidas, 1000);
             document.getElementById('statAvgProgress').textContent = mediaGeral + "%";
@@ -225,12 +231,10 @@
             let temAlgumaCategoria = false;
 
             categorias.forEach(cat => {
-                // Filtra metas desta categoria
                 const metasCat = metas.filter(m => m.categoria === cat);
                 
                 if (metasCat.length > 0) {
                     temAlgumaCategoria = true;
-                    // Cálculos da categoria
                     const totalCat = metasCat.length;
                     let somaPorcCat = 0;
                     let totalAlvo = 0;
@@ -245,7 +249,6 @@
                     const mediaCat = Math.round(somaPorcCat / totalCat);
                     const config = getCatConfig(cat);
 
-                    // HTML do Item
                     const html = `
                         <div class="category-item">
                             <div class="category-header">
@@ -287,12 +290,11 @@
             }
         }
 
-        // 3. Atividade Recente (Últimas 3 metas criadas)
+        // 3. Atividade Recente
         function gerarAtividadeRecente(metas) {
             const container = document.getElementById('recentActivityContainer');
             container.innerHTML = '';
 
-            // Ordena por ID decrescente (as últimas criadas primeiro)
             const recentes = [...metas].sort((a, b) => b.id - a.id).slice(0, 3);
 
             recentes.forEach(meta => {
@@ -329,13 +331,12 @@
             });
         }
 
-        // 4. Sistema de Conquistas
+        // 4. Conquistas
         function verificarConquistas(metas) {
             const concluidas = metas.filter(m => isConcluida(m)).length;
             const total = metas.length;
             const maxPorcentagem = Math.max(...metas.map(m => calcularPorcentagem(m)), 0);
 
-            // Regras
             unlockIf('achievFirst', total >= 1);
             unlockIf('achievMid', maxPorcentagem >= 50);
             unlockIf('achievWinner', concluidas >= 1);
@@ -351,9 +352,7 @@
             }
         }
 
-        // Utilitários
         function isConcluida(meta) {
-            // Considera concluída se status for 'concluida' OU se atingiu 100%
             const pct = calcularPorcentagem(meta);
             return meta.status === 'concluida' || pct >= 100;
         }
@@ -375,7 +374,6 @@
         }
 
         function formatMoney(value) {
-            // Formatação simples para números grandes
             if (value >= 1000) return (value/1000).toFixed(1) + 'k';
             return Math.round(value);
         }

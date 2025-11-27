@@ -3,6 +3,7 @@ class Meta {
     private $conn;
     private $table = "metas";
 
+    // Todas as propriedades necessárias
     public $id;
     public $usuario_id;
     public $titulo;
@@ -14,21 +15,25 @@ class Meta {
     public $data_inicio;
     public $data_conclusao;
     public $progresso;
+    public $criado_em;
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
     public function criar() {
+        // Query completa com todos os campos novos
         $sql = "INSERT INTO {$this->table} 
                 (usuario_id, titulo, descricao, status, categoria, valor, unidade, data_inicio, data_conclusao, progresso)
                 VALUES (:usuario_id, :titulo, :descricao, :status, :categoria, :valor, :unidade, :data_inicio, :data_conclusao, :progresso)";
 
         $stmt = $this->conn->prepare($sql);
 
+        // Limpeza básica
         $this->titulo = htmlspecialchars(strip_tags($this->titulo));
         $this->descricao = htmlspecialchars(strip_tags($this->descricao));
 
+        // Binding (Ligação) dos parâmetros
         $stmt->bindParam(":usuario_id", $this->usuario_id);
         $stmt->bindParam(":titulo", $this->titulo);
         $stmt->bindParam(":descricao", $this->descricao);
@@ -40,11 +45,13 @@ class Meta {
         $stmt->bindParam(":data_conclusao", $this->data_conclusao);
         $stmt->bindParam(":progresso", $this->progresso);        
 
-        if($stmt->execute()) return true;
+        if ($stmt->execute()) {
+            return true;
+        }
         
-        // Debug caso falhe
-        error_log(print_r($stmt->errorInfo(), true));
-        return false;
+        // Se der erro, lança exceção para o Controller pegar e mostrar o motivo
+        $erro = $stmt->errorInfo();
+        throw new Exception("Erro SQL: " . $erro[2]);
     }
 
     public function listarPorUsuario($usuario_id) {

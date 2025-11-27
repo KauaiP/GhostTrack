@@ -13,23 +13,22 @@
         /* Força texto branco na aba selecionada (Em Andamento / Concluídas) */
         .nav-pills .nav-link.active {
             color: #ffffff !important;
-            background-color: #0d6efd; /* Azul padrão Bootstrap (ou sua cor primária) */
+            background-color: #0d6efd;
             font-weight: 600;
         }
         /* Cor do texto quando não está selecionado */
         .nav-pills .nav-link {
             color: #495057; 
-            background-color: #f8f9fa; /* Fundo cinza claro para destacar o botão */
+            background-color: #f8f9fa;
             margin: 0 5px;
         }
 
-        /* Força texto branco nos botões de filtro (Todas, Saúde, etc) */
+        /* Força texto branco nos botões de filtro */
         .filter-btn.active {
             color: #ffffff !important;
             background-color: #0d6efd;
             border-color: #0d6efd;
         }
-        /* Hover nos botões de filtro */
         .filter-btn:hover {
             background-color: #e2e6ea;
             color: #0d6efd;
@@ -138,7 +137,15 @@
     <script type="module">
         import { listarMetas } from '../js/api.js';
 
-        const usuarioId = 1;
+        // --- VERIFICAÇÃO DE LOGIN ---
+        const userData = localStorage.getItem('usuario_ghosttrack');
+        if (!userData) {
+            window.location.href = '../Login/index.html';
+            throw new Error("Usuário não logado");
+        }
+        const usuarioLogado = JSON.parse(userData);
+        const usuarioId = usuarioLogado.id;
+        // ----------------------------
 
         window.addEventListener('load', async () => {
             const containerActive = document.getElementById('goalsListActive');

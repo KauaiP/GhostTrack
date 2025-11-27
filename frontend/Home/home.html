@@ -215,5 +215,39 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 1. Verifica se tem usuário salvo no navegador
+        const userData = localStorage.getItem('usuario_ghosttrack');
+
+        if (!userData) {
+            // SE NÃO TIVER LOGADO: Redireciona para a tela de login
+            window.location.href = '../Login/index.html';
+        } else {
+            // SE TIVER LOGADO: Pega os dados para personalizar a tela
+            const usuario = JSON.parse(userData);
+
+            // Troca o título principal para dar Oi para o usuário
+            const tituloPrincipal = document.querySelector('.hero h1');
+            if (tituloPrincipal) {
+                tituloPrincipal.innerHTML = `<i class="fas fa-ghost"></i> Olá, ${usuario.nome}!`;
+            }
+
+            // Esconde os botões de "Começar Agora" se ele já estiver logado
+            const botoesHero = document.querySelector('.hero-buttons');
+            if (botoesHero) {
+                // Troca os botões de cadastro por um botão de "Ir para Relatórios"
+                botoesHero.innerHTML = `
+                    <a href="../Consulta/consulta.html" class="btn btn-primary-hero">Minhas Metas</a>
+                    <button onclick="logout()" class="btn btn-outline-hero">Sair</button>
+                `;
+            }
+        }
+
+        // Função de Sair (Logout)
+        function logout() {
+            localStorage.removeItem('usuario_ghosttrack');
+            window.location.href = '../Login/index.html';
+        }
+    </script>
 </body>
 </html>
