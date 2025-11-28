@@ -118,17 +118,8 @@
     <script type="module">
         import { listarMetas, atualizarMeta } from '../js/api.js';
 
-        // --- VERIFICAÇÃO DE LOGIN ---
-        const userData = localStorage.getItem('usuario_ghosttrack');
-        if (!userData) {
-            window.location.href = '../Login/index.html';
-            throw new Error("Usuário não logado");
-        }
-        const usuarioLogado = JSON.parse(userData);
-        const usuarioId = usuarioLogado.id;
-        // ----------------------------
-
         let selectedGoal = null;
+        const usuarioId = 1;
 
         window.addEventListener('load', async () => {
             await carregarMetas();
@@ -154,6 +145,7 @@
                     return;
                 }
 
+                // --- A MÁGICA ACONTECE AQUI ---
                 // Filtramos para mostrar APENAS metas que NÃO estão concluídas
                 const metasAtivas = resultado.data.filter(m => !isConcluida(m));
 
