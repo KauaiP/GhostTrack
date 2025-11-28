@@ -7,9 +7,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
+    <!-- CSS Específico da Página -->
     <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../Home/home.html">
@@ -25,10 +27,10 @@
                         <a class="nav-link" href="../Home/home.html"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
+                        <a class="nav-link active" href="../QS/qs.html"><i class="fas fa-users"></i> Quem Somos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="./cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
+                        <a class="nav-link" href="./cadastro.html"><i class="fas fa-user-plus"></i> Cadastro</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Consulta/consulta.html"><i class="fas fa-search"></i> Consulta</a>
@@ -47,6 +49,7 @@
         </div>
     </nav>
 
+    <!-- Page Header -->
     <section class="page-header">
         <div class="container">
             <h1><i class="fas fa-plus-circle"></i> Cadastrar Nova Meta</h1>
@@ -54,6 +57,7 @@
         </div>
     </section>
 
+    <!-- Form Section -->
     <section class="form-section">
         <div class="container">
             <div class="form-container">
@@ -166,6 +170,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -216,16 +221,6 @@
     <script type="module">
         import { criarMeta } from '../js/api.js';
 
-        // --- VERIFICAÇÃO DE LOGIN ---
-        const userData = localStorage.getItem('usuario_ghosttrack');
-        if (!userData) {
-            window.location.href = '../Login/index.html';
-            throw new Error("Usuário não logado");
-        }
-        const usuarioLogado = JSON.parse(userData);
-        const usuarioId = usuarioLogado.id;
-        // ----------------------------
-
         // Configura a data mínima para hoje
         const hoje = new Date().toISOString().split('T')[0];
         document.getElementById('goalStart').min = hoje;
@@ -234,9 +229,14 @@
         document.getElementById('goalForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // Pega o valor dos botões de rádio
+            // --- CORREÇÃO AQUI ---
+            // Para pegar o valor de radio buttons, usamos o seletor querySelector
+            // procurando pelo input com name="category" que esteja marcado (:checked)
             const categoriaElement = document.querySelector('input[name="category"]:checked');
+            
+            // Validação extra caso nada tenha sido selecionado
             const categoria = categoriaElement ? categoriaElement.value : "pessoal"; 
+            // ---------------------
 
             const titulo = document.getElementById('goalTitle').value;
             const descricao = document.getElementById('goalDescription').value;
@@ -245,12 +245,12 @@
             const data_inicio = document.getElementById('goalStart').value;
             const data_conclusao = document.getElementById('goalEnd').value;
             
+            const usuario_id = 1; 
             const progresso = 0;
 
             try {
-                // Passa o usuarioId real (do login) para a API
                 const resultado = await criarMeta(
-                    usuarioId, 
+                    usuario_id, 
                     titulo, 
                     descricao, 
                     categoria, 
