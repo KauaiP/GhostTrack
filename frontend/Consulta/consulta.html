@@ -10,26 +10,22 @@
     <link rel="stylesheet" href="./consulta.css">
     
     <style>
-        /* Força texto branco na aba selecionada (Em Andamento / Concluídas) */
         .nav-pills .nav-link.active {
             color: #ffffff !important;
-            background-color: #0d6efd; /* Azul padrão Bootstrap (ou sua cor primária) */
+            background-color: #0d6efd;
             font-weight: 600;
         }
-        /* Cor do texto quando não está selecionado */
         .nav-pills .nav-link {
             color: #495057; 
-            background-color: #f8f9fa; /* Fundo cinza claro para destacar o botão */
+            background-color: #f8f9fa;
             margin: 0 5px;
         }
 
-        /* Força texto branco nos botões de filtro (Todas, Saúde, etc) */
         .filter-btn.active {
             color: #ffffff !important;
             background-color: #0d6efd;
             border-color: #0d6efd;
         }
-        /* Hover nos botões de filtro */
         .filter-btn:hover {
             background-color: #e2e6ea;
             color: #0d6efd;
@@ -165,11 +161,9 @@
                     
                     if (statusConcluido) {
                         temConcluidas = true;
-                        // Cria card SEM botão de editar
                         containerCompleted.innerHTML += criarHTMLCard(meta, true);
                     } else {
                         temAtivas = true;
-                        // Cria card COM botão de editar
                         containerActive.innerHTML += criarHTMLCard(meta, false);
                     }
                 });
@@ -180,7 +174,6 @@
                 ativarFiltros();
 
             } catch (error) {
-                console.error(error);
                 containerActive.innerHTML = '<div class="alert alert-danger">Erro de conexão.</div>';
             }
         });

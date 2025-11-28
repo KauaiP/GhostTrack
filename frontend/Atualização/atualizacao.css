@@ -1,8 +1,3 @@
-/* ===================================
-   ATUALIZAÇÃO PAGE STYLES
-   =================================== */
-
-/* Update Section */
 .update-section {
     padding: 60px 0;
 }
@@ -165,7 +160,6 @@
     margin-top: 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .goal-option {
         flex-direction: column;

@@ -145,8 +145,6 @@
                     return;
                 }
 
-                // --- A MÁGICA ACONTECE AQUI ---
-                // Filtramos para mostrar APENAS metas que NÃO estão concluídas
                 const metasAtivas = resultado.data.filter(m => !isConcluida(m));
 
                 if (metasAtivas.length === 0) {
@@ -168,12 +166,10 @@
                 adicionarEventosClique();
 
             } catch (error) {
-                console.error(error);
                 container.innerHTML = '<div class="alert alert-danger">Erro ao carregar lista.</div>';
             }
         }
 
-        // Função auxiliar para checar se está concluída
         function isConcluida(meta) {
             const progresso = parseFloat(meta.progresso || 0);
             const valorTotal = parseFloat(meta.valor || 1);
@@ -288,7 +284,6 @@
                     showAlert('Erro ao atualizar.', 'danger');
                 }
             } catch (error) {
-                console.error(error);
                 showAlert('Erro de conexão.', 'danger');
             }
         });

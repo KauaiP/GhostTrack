@@ -1,8 +1,3 @@
-/* ===================================
-   CONSULTA PAGE STYLES
-   =================================== */
-
-/* Filter Section */
 .filter-section {
     background: white;
     padding: 30px;
@@ -38,7 +33,6 @@
     border-color: transparent;
 }
 
-/* Goals Section */
 .goals-section {
     padding: 40px 0 60px;
 }
@@ -201,7 +195,6 @@
     margin-bottom: 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .goal-header {
         flex-direction: column;

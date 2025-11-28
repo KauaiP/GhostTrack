@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="./relatorios.css">
     <style>
-        /* CSS Extra para conquistas bloqueadas */
         .achievement-card.locked {
             opacity: 0.5;
             filter: grayscale(100%);
@@ -192,31 +191,26 @@
                     document.getElementById('categoryReportsContainer').innerHTML = '<p class="text-muted">Nenhum dado encontrado.</p>';
                 }
             } catch (error) {
-                console.error("Erro ao carregar relatórios", error);
             }
         });
 
-        // 1. Cards do Topo
         function calcularEstatisticasGerais(metas) {
             const total = metas.length;
             const concluidas = metas.filter(m => isConcluida(m)).length;
             const ativas = total - concluidas;
 
-            // Calcula média de progresso de TODAS as metas
             let somaPorcentagens = 0;
             metas.forEach(m => {
                 somaPorcentagens += calcularPorcentagem(m);
             });
             const mediaGeral = total > 0 ? Math.round(somaPorcentagens / total) : 0;
 
-            // Atualiza HTML
             animateValue("statActive", 0, ativas, 1000);
             animateValue("statCompleted", 0, concluidas, 1000);
             document.getElementById('statAvgProgress').textContent = mediaGeral + "%";
             animateValue("statTotal", 0, total, 1000);
         }
 
-        // 2. Relatório por Categoria
         function gerarRelatorioCategorias(metas) {
             const container = document.getElementById('categoryReportsContainer');
             container.innerHTML = '';
@@ -225,12 +219,10 @@
             let temAlgumaCategoria = false;
 
             categorias.forEach(cat => {
-                // Filtra metas desta categoria
                 const metasCat = metas.filter(m => m.categoria === cat);
                 
                 if (metasCat.length > 0) {
                     temAlgumaCategoria = true;
-                    // Cálculos da categoria
                     const totalCat = metasCat.length;
                     let somaPorcCat = 0;
                     let totalAlvo = 0;
@@ -245,7 +237,6 @@
                     const mediaCat = Math.round(somaPorcCat / totalCat);
                     const config = getCatConfig(cat);
 
-                    // HTML do Item
                     const html = `
                         <div class="category-item">
                             <div class="category-header">
@@ -287,12 +278,10 @@
             }
         }
 
-        // 3. Atividade Recente (Últimas 3 metas criadas)
         function gerarAtividadeRecente(metas) {
             const container = document.getElementById('recentActivityContainer');
             container.innerHTML = '';
 
-            // Ordena por ID decrescente (as últimas criadas primeiro)
             const recentes = [...metas].sort((a, b) => b.id - a.id).slice(0, 3);
 
             recentes.forEach(meta => {
@@ -329,13 +318,11 @@
             });
         }
 
-        // 4. Sistema de Conquistas
         function verificarConquistas(metas) {
             const concluidas = metas.filter(m => isConcluida(m)).length;
             const total = metas.length;
             const maxPorcentagem = Math.max(...metas.map(m => calcularPorcentagem(m)), 0);
 
-            // Regras
             unlockIf('achievFirst', total >= 1);
             unlockIf('achievMid', maxPorcentagem >= 50);
             unlockIf('achievWinner', concluidas >= 1);
@@ -351,9 +338,7 @@
             }
         }
 
-        // Utilitários
         function isConcluida(meta) {
-            // Considera concluída se status for 'concluida' OU se atingiu 100%
             const pct = calcularPorcentagem(meta);
             return meta.status === 'concluida' || pct >= 100;
         }
@@ -375,7 +360,6 @@
         }
 
         function formatMoney(value) {
-            // Formatação simples para números grandes
             if (value >= 1000) return (value/1000).toFixed(1) + 'k';
             return Math.round(value);
         }

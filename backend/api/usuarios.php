@@ -15,7 +15,7 @@ $method = $_SERVER["REQUEST_METHOD"];
 
 switch ($method) {
 
-    case "GET": // select em um usuário
+    case "GET":
         if (!empty($_GET["id"])) {
             $usuario->id = $_GET["id"];
             $stmt = $usuario->lerUm();

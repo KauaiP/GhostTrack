@@ -1,8 +1,3 @@
-/* ===================================
-   EXCLUSÃO PAGE STYLES
-   =================================== */
-
-/* Delete Section */
 .delete-section {
     padding: 60px 0;
 }
@@ -153,7 +148,6 @@
     color: var(--primary);
 }
 
-/* Modal */
 .modal-content {
     border-radius: 20px;
     border: none;
@@ -214,7 +208,6 @@
     margin-bottom: 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .goal-header {
         flex-direction: column;

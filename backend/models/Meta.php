@@ -42,8 +42,6 @@ class Meta {
 
         if($stmt->execute()) return true;
         
-        // Debug caso falhe
-        error_log(print_r($stmt->errorInfo(), true));
         return false;
     }
 

@@ -1,13 +1,7 @@
-/* ===================================
-   RELATÓRIOS PAGE STYLES
-   =================================== */
-
-/* Reports Section */
 .reports-section {
     padding: 60px 0;
 }
 
-/* Stats Cards */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -69,7 +63,6 @@
     font-weight: 500;
 }
 
-/* Category Reports */
 .category-reports {
     background: white;
     border-radius: 20px;
@@ -164,7 +157,6 @@
     color: var(--primary);
 }
 
-/* Recent Activity */
 .recent-activity {
     background: white;
     border-radius: 20px;
@@ -237,7 +229,6 @@
     white-space: nowrap;
 }
 
-/* Achievements */
 .achievements-section {
     background: white;
     border-radius: 20px;
@@ -295,7 +286,6 @@
     font-size: 0.85rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .category-header {
         flex-direction: column;

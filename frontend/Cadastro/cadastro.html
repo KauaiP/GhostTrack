@@ -221,7 +221,6 @@
     <script type="module">
         import { criarMeta } from '../js/api.js';
 
-        // Configura a data mínima para hoje
         const hoje = new Date().toISOString().split('T')[0];
         document.getElementById('goalStart').min = hoje;
         document.getElementById('goalEnd').min = hoje;
@@ -229,14 +228,8 @@
         document.getElementById('goalForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            // --- CORREÇÃO AQUI ---
-            // Para pegar o valor de radio buttons, usamos o seletor querySelector
-            // procurando pelo input com name="category" que esteja marcado (:checked)
             const categoriaElement = document.querySelector('input[name="category"]:checked');
-            
-            // Validação extra caso nada tenha sido selecionado
-            const categoria = categoriaElement ? categoriaElement.value : "pessoal"; 
-            // ---------------------
+            const categoria = categoriaElement ? categoriaElement.value : "pessoal";
 
             const titulo = document.getElementById('goalTitle').value;
             const descricao = document.getElementById('goalDescription').value;
@@ -266,12 +259,9 @@
                     this.reset(); 
                 } else {
                     showAlert('Erro: ' + (resultado?.message || 'Erro desconhecido'), 'danger');
-                    console.error('Erro do Backend:', resultado);
                 }
 
             } catch (error) {
-                console.error('Erro de conexao:', error);
-                // Mensagem mais específica dependendo do erro
                 let mensagemErro = 'Erro ao conectar com o servidor.';
                 
                 if (error && error.message) {

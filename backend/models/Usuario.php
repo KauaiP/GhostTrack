@@ -12,7 +12,6 @@ class Usuario {
         $this->conn = $db;
     }
 
-    // Criar usuário
     public function criar() {
         $sql = "INSERT INTO {$this->table} (nome, email, senha) 
                 VALUES (:nome, :email, :senha)";
@@ -25,7 +24,6 @@ class Usuario {
         return $stmt->execute();
     }
 
-    // Listar todos
     public function listar() {
         $sql = "SELECT id, nome, email FROM {$this->table}";
         $stmt = $this->conn->prepare($sql);
@@ -33,7 +31,6 @@ class Usuario {
         return $stmt;
     }
 
-    // Ler único
     public function lerUm() {
         $sql = "SELECT id, nome, email FROM {$this->table} WHERE id = :id LIMIT 1";
         $stmt = $this->conn->prepare($sql);
@@ -42,7 +39,6 @@ class Usuario {
         return $stmt;
     }
 
-    // Deletar
     public function deletar() {
         $sql = "DELETE FROM {$this->table} WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
