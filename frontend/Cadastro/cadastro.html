@@ -64,6 +64,14 @@
 
                 <div id="alertContainer"></div>
 
+                <!-- Aviso sobre bloqueadores de anúncios -->
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <i class="fas fa-info-circle"></i> 
+                    <strong>Importante:</strong> Se você usa bloqueador de anúncios (uBlock, AdBlock, Brave Shields), 
+                    desative-o temporariamente para este site funcionar corretamente.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
                 <form id="goalForm">
                     <div class="mb-4">
                         <label for="goalTitle" class="form-label">
@@ -254,16 +262,27 @@
                 );
 
                 if (resultado && resultado.success) {
-                    showAlert('✅ Meta salva com sucesso no Banco de Dados!', 'success');
+                    showAlert('Meta salva com sucesso no Banco de Dados!', 'success');
                     this.reset(); 
                 } else {
-                    showAlert('❌ Erro: ' + (resultado.message || 'Erro desconhecido'), 'danger');
+                    showAlert('Erro: ' + (resultado?.message || 'Erro desconhecido'), 'danger');
                     console.error('Erro do Backend:', resultado);
                 }
 
             } catch (error) {
-                console.error('Erro de conexão:', error);
-                showAlert('⚠️ Erro ao conectar com o servidor.', 'danger');
+                console.error('Erro de conexao:', error);
+                // Mensagem mais específica dependendo do erro
+                let mensagemErro = 'Erro ao conectar com o servidor.';
+                
+                if (error && error.message) {
+                    if (error.message.includes('Failed to fetch')) {
+                        mensagemErro = 'Nao foi possivel conectar ao servidor.\n\nVERIFIQUE:\n1. Servidor PHP esta rodando? (php -S localhost:8000)\n2. Bloqueador de anuncios ativo? (Desative para localhost)\n3. Extensoes do navegador bloqueando?';
+                    } else {
+                        mensagemErro = 'Erro: ' + error.message;
+                    }
+                }
+                
+                showAlert(mensagemErro, 'danger');
             }
         });
 

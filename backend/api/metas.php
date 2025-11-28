@@ -1,5 +1,5 @@
 <?php
-// Configuração de Debug
+// Configuracao de Debug
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
@@ -20,9 +20,9 @@ try {
     $metaPath = $baseDir . "models/Meta.php";
     $responsePath = $baseDir . "utils/Response.php";
 
-    if (!file_exists($dbPath)) throw new Exception("Arquivo db.php não encontrado.");
-    if (!file_exists($metaPath)) throw new Exception("Arquivo Meta.php não encontrado.");
-    if (!file_exists($responsePath)) throw new Exception("Arquivo Response.php não encontrado.");
+    if (!file_exists($dbPath)) throw new Exception("Arquivo db.php nao encontrado.");
+    if (!file_exists($metaPath)) throw new Exception("Arquivo Meta.php nao encontrado.");
+    if (!file_exists($responsePath)) throw new Exception("Arquivo Response.php nao encontrado.");
 
     require_once $dbPath;
     require_once $metaPath;
@@ -31,7 +31,7 @@ try {
     $database = new Database();
     $db = $database->getConnection();
     
-    if ($db === null) throw new Exception("Erro de conexão com o banco.");
+    if ($db === null) throw new Exception("Erro de conexao com o banco.");
 
     $meta = new Meta($db);
     $response = new Response();
@@ -49,14 +49,39 @@ try {
             $jsonRaw = file_get_contents("php://input");
             $dados = json_decode($jsonRaw);
 
-            if (!$dados) throw new Exception("JSON inválido.");
-            
-            // Validação
-            if (empty($dados->titulo) || empty($dados->usuario_id)) {
-                throw new Exception("Título e Usuario ID obrigatórios.");
+            if (!$dados) throw new Exception("JSON invalido.");
+
+            // Suporte a override de metodo (InfinityFree bloqueia PUT/DELETE)
+            $acao = $dados->acao ?? null; // 'criar' | 'atualizar' | 'deletar'
+
+            if ($acao === 'atualizar') {
+                if (!isset($dados->id)) throw new Exception("ID obrigatorio.");
+                $meta->id = $dados->id;
+                $meta->titulo = $dados->titulo ?? null;
+                $meta->descricao = $dados->descricao ?? null;
+                $meta->progresso = $dados->progresso ?? 0;
+                $meta->status = $dados->status ?? "em_andamento";
+                if ($meta->atualizar()) $response->success([], "Atualizado!");
+                else throw new Exception("Falha ao atualizar.");
+                break;
             }
 
-            // Atribuição de dados
+            if ($acao === 'deletar') {
+                $id = $dados->id ?? null;
+                if (!$id) throw new Exception("ID obrigatorio.");
+                $meta->id = $id;
+                if ($meta->deletar()) $response->success([], "Deletado!");
+                else throw new Exception("Falha ao deletar.");
+                break;
+            }
+
+            // Default: criar
+            // Validacao
+            if (empty($dados->titulo) || empty($dados->usuario_id)) {
+                throw new Exception("Titulo e Usuario ID obrigatorios.");
+            }
+
+            // Atribuicao de dados
             $meta->usuario_id = $dados->usuario_id;
             $meta->titulo = $dados->titulo;
             $meta->descricao = $dados->descricao ?? "";
@@ -76,33 +101,31 @@ try {
             break;
 
         case "PUT":
+            // Alguns hosts bloqueiam PUT; mantemos por compatibilidade
             $dados = json_decode(file_get_contents("php://input"));
-            if (!isset($dados->id)) throw new Exception("ID obrigatório.");
-
+            if (!isset($dados->id)) throw new Exception("ID obrigatorio.");
             $meta->id = $dados->id;
-            $meta->titulo = $dados->titulo;
-            $meta->descricao = $dados->descricao;
+            $meta->titulo = $dados->titulo ?? null;
+            $meta->descricao = $dados->descricao ?? null;
             $meta->progresso = $dados->progresso ?? 0;
             $meta->status = $dados->status ?? "em_andamento"; 
-
             if ($meta->atualizar()) $response->success([], "Atualizado!");
             else throw new Exception("Falha ao atualizar.");
             break;
 
         case "DELETE":
             $id = $_GET['id'] ?? json_decode(file_get_contents("php://input"))->id ?? null;
-            if (!$id) throw new Exception("ID obrigatório.");
+            if (!$id) throw new Exception("ID obrigatorio.");
             $meta->id = $id;
             if ($meta->deletar()) $response->success([], "Deletado!");
             else throw new Exception("Falha ao deletar.");
             break;
             
         default:
-            $response->error("Método inválido", 405);
+            $response->error("Metodo invalido", 405);
     }
 
 } catch (Throwable $e) { 
-    // MUDANÇA IMPORTANTE: "Throwable" pega erros fatais que "Exception" não pega
     http_response_code(500);
     echo json_encode([
         "success" => false,

@@ -1,7 +1,24 @@
-const API_URL = "http://localhost:8000/backend/api";
+// Detecta automaticamente se esta em producao ou desenvolvimento
+const isLocalhost = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname === '';
+
+const isProduction = !isLocalhost;
+
+// Para o servidor free.nf, usa o mesmo dominio em producao
+const API_URL = isProduction 
+    ? window.location.origin + "/backend/api"
+    : "http://localhost:8000/backend/api";
+
+console.log("===== DEBUG API =====");
+console.log("Hostname:", window.location.hostname);
+console.log("Origin:", window.location.origin);
+console.log("Ambiente:", isProduction ? "PRODUCAO" : "DESENVOLVIMENTO");
+console.log("API URL:", API_URL);
+console.log("====================");
 
 // -----------------------
-//     USUÁRIOS
+//     USUARIOS
 // -----------------------
 
 export async function criarUsuario(nome, email, senha) {
@@ -11,18 +28,30 @@ export async function criarUsuario(nome, email, senha) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nome, email, senha })
         });
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+        
         return await resposta.json();
     } catch (error) {
         console.error("Erro ao criar usuário:", error);
+        throw error;
     }
 }
 
 export async function listarUsuarios() {
     try {
         const resposta = await fetch(`${API_URL}/usuarios.php`);
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+        
         return await resposta.json();
     } catch (error) {
         console.error("Erro ao listar usuários:", error);
+        throw error;
     }
 }
 
@@ -48,27 +77,40 @@ export async function criarMeta(usuario_id, titulo, descricao, categoria, valor,
                 progresso
             })
         });
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+        
         return await resposta.json();
     } catch (error) {
         console.error("Erro ao criar meta:", error);
+        throw error; // Re-throw para que o código chamador possa tratar
     }
 }
 
 export async function listarMetas(usuario_id) {
     try {
         const resposta = await fetch(`${API_URL}/metas.php?usuario_id=${usuario_id}`);
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+        
         return await resposta.json();
     } catch (error) {
         console.error("Erro ao listar metas:", error);
+        throw error;
     }
 }
 
 export async function atualizarMeta(id, titulo, descricao, status, progresso) {
     try {
         const resposta = await fetch(`${API_URL}/metas.php`, {
-            method: "PUT",
+            method: "POST", // override para hosts que bloqueiam PUT
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
+                acao: "atualizar",
                 id, 
                 titulo, 
                 descricao, 
@@ -76,9 +118,15 @@ export async function atualizarMeta(id, titulo, descricao, status, progresso) {
                 progresso 
             })
         });
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+        
         return await resposta.json();
     } catch (error) {
         console.error("Erro ao atualizar meta:", error);
+        throw error;
     }
 }
 
@@ -86,12 +134,18 @@ export async function atualizarMeta(id, titulo, descricao, status, progresso) {
 export async function deletarMeta(id) {
     try {
         const resposta = await fetch(`${API_URL}/metas.php`, {
-            method: "DELETE", 
+            method: "POST", // override para hosts que bloqueiam DELETE
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id })
+            body: JSON.stringify({ acao: "deletar", id })
         });
+        
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+        
         return await resposta.json();
     } catch (error) {
         console.error("Erro ao deletar meta:", error);
+        throw error;
     }
 }
